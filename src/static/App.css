@@ -1,0 +1,92 @@
+#btn\ edit-delete {
+    left: 10px;
+}
+
+.shopping-list-count{
+    margin-top: 20px;
+}
+
+span.text-center.page-info {
+    margin-left: 10px;
+}
+
+.update-account-btn,
+.delete-account-btn,
+.update-account-password-btn
+{
+    margin-left: 7px;
+}
+
+form.signup-form,
+form.shoppinglist-create,
+form.shoppinglist-edit,
+form.shopping-item-create,
+form.shopping-item-edit,
+form.account-edit-form,
+form.account-password-reset-form{
+    padding: 40px;
+}
+
+.well.account-info {
+    padding-bottom: 40px;
+}
+
+.thumbnail.signup,
+.thumbnail.account-edit,
+.thumbnail.shoppinglist-create,
+.thumbnail.shoppinglist-edit,
+.thumbnail.shopping-item-create,
+.thumbnail.shopping-item-edit,
+.thumbnail.account-password-reset{
+    margin-top: 100px;
+}
+
+.shoppinglist-box {
+    height: 92px;
+}
+
+.jumbotron.welcome-box {
+    margin-top: 70px;
+}
+
+.shopping-lists{
+    min-height: 868px;
+}
+
+.results-count{
+    margin-left: 10px;
+}
+
+.react-confirm-alert {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 500px;
+    padding: 30px;
+    text-align: left;
+    background: #fff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);
+    color: #666;
+}
+
+.react-confirm-alert h1{
+    font-size: 22px;
+    text-align: center;
+}
+
+.react-confirm-alert h3{
+    text-align: center;
+}
+
+.react-confirm-alert button{
+    margin-top: 23px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.intro-text {
+    text-align: center;
+    margin-top: 25%;
+    line-height: 65px;
+    z-index: 0;
+}
