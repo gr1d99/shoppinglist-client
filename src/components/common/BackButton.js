@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const backButton = WrappedClass => {
-    return class ShowBackButton extends React.Component {
+    return  class ShowBackButton extends React.Component {
         render() {
             return (
                 <div className="col-md-12">
