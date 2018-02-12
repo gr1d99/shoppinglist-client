@@ -10,6 +10,7 @@
     "expect": "^22.2.2",
     "react": "^16.2.0",
     "react-addons-test-utils": "^15.6.2",
+    "react-confirm-alert": "^1.0.8",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
