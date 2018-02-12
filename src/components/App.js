@@ -9,7 +9,7 @@ import HomePage from '../components/Home';
 //
 // import AlertMessages from '../containers/utils/messages'
 //
-// import SignUp from '../containers/auth/Signup';
+import SignUp from '../containers/auth/Signup';
 // import Login from '../containers/auth/Login';
 // import Logout from '../containers/auth/Logout';
 // import EditAccount from '../containers/auth/Edit';
@@ -59,7 +59,7 @@ export class App extends Component {
                     </div>
                     <Switch>
                         <Route exact path="/" component={HomePage}/>
-                        {/*<Route path="/signup" component={SignUp}/>*/}
+                        <Route path="/signup" component={SignUp}/>
                         {/*<Route path="/login" component={Login}/>*/}
                         {/*<Route path="/logout" component={Logout}/>*/}
                         {/*<Route path="/shoppinglists/create" component={CreateShoppingList}/>*/}
