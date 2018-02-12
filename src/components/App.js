@@ -11,7 +11,7 @@ import HomePage from '../components/Home';
 //
 import SignUp from '../containers/auth/Signup';
 import Login from '../containers/auth/Login';
-// import Logout from '../containers/auth/Logout';
+import Logout from '../containers/auth/Logout';
 // import EditAccount from '../containers/auth/Edit';
 // import ResetPassword from '../containers/auth/password/ResetPassword';
 //
@@ -25,7 +25,7 @@ import Login from '../containers/auth/Login';
 // import EdiShoppingItem from '../containers/shoppingitems/Edit';
 // import SearchShoppingLists from '../containers/search/Search';
 //
-// import AppLinks, { ShoppingListsLink } from './includes/AppLinks';
+import AppLinks, { ShoppingListsLink } from './includes/AppLinks';
 
 import '../static/App.css';
 
@@ -49,7 +49,7 @@ export class App extends Component {
                         </div>
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            {/*<AppLinks isAuthenticated={this.props.auth.isAuthenticated}/>*/}
+                            <AppLinks isAuthenticated={this.props.auth.isAuthenticated}/>
                         </div>
                     </div>
                 </nav>
@@ -61,7 +61,7 @@ export class App extends Component {
                         <Route exact path="/" component={HomePage}/>
                         <Route path="/signup" component={SignUp}/>
                         <Route path="/login" component={Login}/>
-                        {/*<Route path="/logout" component={Logout}/>*/}
+                        <Route path="/logout" component={Logout}/>
                         {/*<Route path="/shoppinglists/create" component={CreateShoppingList}/>*/}
                         {/*<Route path="/shoppinglists/search" component={SearchShoppingLists}/>*/}
                         {/*<Route path="/shoppinglists/:id/items/:id/edit" component={EdiShoppingItem}/>*/}
