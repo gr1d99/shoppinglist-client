@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 
 import { updateShoppingListItem } from "../../dispatchers/index";
 import SubmitButton  from '../../components/common/button';
-import { loginRequired } from "../auth/helpers/index";
+import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
 class EditShoppingListItem extends React.Component {
