@@ -18,7 +18,7 @@ import Logout from '../containers/auth/Logout';
 import ShoppingList from '../containers/shoppinglist/List';
 import CreateShoppingList from '../containers/shoppinglist/Create';
 import ShoppingListDetail from '../containers/shoppinglist/Detail';
-// import EditShoppingList from '../containers/shoppinglist/Edit';
+import EditShoppingList from '../containers/shoppinglist/Edit';
 //
 // import CreateShoppingItem from '../containers/shoppingitems/Create';
 // import ShoppingItems from '../containers/shoppingitems/List';
@@ -67,7 +67,7 @@ export class App extends Component {
                         {/*<Route path="/shoppinglists/:id/items/:id/edit" component={EdiShoppingItem}/>*/}
                         {/*<Route path="/shoppinglists/:id/items/create" component={CreateShoppingItem}/>*/}
                         {/*<Route path="/shoppinglists/:id/items" component={ShoppingItems}/>*/}
-                        {/*<Route path="/shoppinglists/:id/edit" component={EditShoppingList}/>*/}
+                        <Route path="/shoppinglists/:id/edit" component={EditShoppingList}/>
                         <Route path="/shoppinglists/:id" component={ShoppingListDetail}/>
                         <Route path="/shoppinglists" component={ShoppingList}/>
                         {/*<Route path="/dashboard/account/edit" component={EditAccount}/>*/}
