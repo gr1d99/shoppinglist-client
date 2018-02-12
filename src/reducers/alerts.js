@@ -1,6 +1,6 @@
 import * as types from '../actions/ActionTypes'
 
-const initialState = {
+export const initialState = {
     success_message: '',
     warning_message: '',
     error_message: '',
