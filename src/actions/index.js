@@ -303,20 +303,23 @@ export const suspiciousOperation = error => {
 
 export const failedOperation = error => {
     let payload = null;
-    if (error.response.data.message.token) {
-        payload = error.response.data.message.token;
-    }
-    if(error.response.data.message.password) {
-        payload = error.response.data.message.password;
-    }
 
-    if (error.response.data.message) {
+    if (error.response.data.hasOwnProperty('message')) {
         payload = error.response.data.message
+
+        if(error.response.data.message.hasOwnProperty('password')) {
+            payload = error.response.data.message.password;
+        }
+
+        if (error.response.data.message.hasOwnProperty('token')) {
+            payload = error.response.data.message.token;
+        }
+
     }
 
     return {
         type: types.ERROR_ALERT,
-        payload: error.payload
+        payload: payload
     }
 };
 
