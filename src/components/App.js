@@ -10,7 +10,7 @@ import HomePage from '../components/Home';
 // import AlertMessages from '../containers/utils/messages'
 //
 import SignUp from '../containers/auth/Signup';
-// import Login from '../containers/auth/Login';
+import Login from '../containers/auth/Login';
 // import Logout from '../containers/auth/Logout';
 // import EditAccount from '../containers/auth/Edit';
 // import ResetPassword from '../containers/auth/password/ResetPassword';
@@ -60,7 +60,7 @@ export class App extends Component {
                     <Switch>
                         <Route exact path="/" component={HomePage}/>
                         <Route path="/signup" component={SignUp}/>
-                        {/*<Route path="/login" component={Login}/>*/}
+                        <Route path="/login" component={Login}/>
                         {/*<Route path="/logout" component={Logout}/>*/}
                         {/*<Route path="/shoppinglists/create" component={CreateShoppingList}/>*/}
                         {/*<Route path="/shoppinglists/search" component={SearchShoppingLists}/>*/}
