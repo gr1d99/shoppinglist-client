@@ -22,8 +22,8 @@ import EditShoppingList from '../containers/shoppinglist/Edit';
 //
 import CreateShoppingItem from '../containers/shoppingitems/Create';
 import ShoppingItems from '../containers/shoppingitems/List';
-// import EdiShoppingItem from '../containers/shoppingitems/Edit';
-// import SearchShoppingLists from '../containers/search/Search';
+import EdiShoppingItem from '../containers/shoppingitems/Edit';
+import SearchShoppingLists from '../containers/search/Search';
 //
 import AppLinks, { ShoppingListsLink } from './includes/AppLinks';
 
@@ -63,8 +63,8 @@ export class App extends Component {
                         <Route path="/login" component={Login}/>
                         <Route path="/logout" component={Logout}/>
                         <Route path="/shoppinglists/create" component={CreateShoppingList}/>
-                        {/*<Route path="/shoppinglists/search" component={SearchShoppingLists}/>*/}
-                        {/*<Route path="/shoppinglists/:id/items/:id/edit" component={EdiShoppingItem}/>*/}
+                        <Route path="/shoppinglists/search" component={SearchShoppingLists}/>
+                        <Route path="/shoppinglists/:id/items/:id/edit" component={EdiShoppingItem}/>
                         <Route path="/shoppinglists/:id/items/create" component={CreateShoppingItem}/>
                         <Route path="/shoppinglists/:id/items" component={ShoppingItems}/>
                         <Route path="/shoppinglists/:id/edit" component={EditShoppingList}/>
