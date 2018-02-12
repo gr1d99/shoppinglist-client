@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
-class HomePage extends React.Component {
+export class HomePage extends React.Component {
     getUserName = () => {
         switch (this.props.auth.isAuthenticated){
             case false:

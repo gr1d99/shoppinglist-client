@@ -29,7 +29,7 @@ import HomePage from '../components/Home';
 
 import '../static/App.css';
 
-class App extends Component {
+export class App extends Component {
     render() {
     return (
         <BrowserRouter>
