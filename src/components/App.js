@@ -12,7 +12,7 @@ import Dashboard from '../components/auth/Dashboard';
 import SignUp from '../containers/auth/Signup';
 import Login from '../containers/auth/Login';
 import Logout from '../containers/auth/Logout';
-// import EditAccount from '../containers/auth/Edit';
+import EditAccount from '../containers/auth/Edit';
 // import ResetPassword from '../containers/auth/password/ResetPassword';
 //
 import ShoppingList from '../containers/shoppinglist/List';
@@ -23,7 +23,7 @@ import EditShoppingList from '../containers/shoppinglist/Edit';
 import CreateShoppingItem from '../containers/shoppingitems/Create';
 import ShoppingItems from '../containers/shoppingitems/List';
 import EdiShoppingItem from '../containers/shoppingitems/Edit';
-// import SearchShoppingLists from '../containers/search/Search';
+import SearchShoppingLists from '../containers/search/Search';
 //
 import AppLinks, { ShoppingListsLink } from './includes/AppLinks';
 
@@ -63,14 +63,14 @@ export class App extends Component {
                         <Route path="/login" component={Login}/>
                         <Route path="/logout" component={Logout}/>
                         <Route path="/shoppinglists/create" component={CreateShoppingList}/>
-                        {/*<Route path="/shoppinglists/search" component={SearchShoppingLists}/>*/}
+                        <Route path="/shoppinglists/search" component={SearchShoppingLists}/>
                         <Route path="/shoppinglists/:id/items/:id/edit" component={EdiShoppingItem}/>
                         <Route path="/shoppinglists/:id/items/create" component={CreateShoppingItem}/>
                         <Route path="/shoppinglists/:id/items" component={ShoppingItems}/>
                         <Route path="/shoppinglists/:id/edit" component={EditShoppingList}/>
                         <Route path="/shoppinglists/:id" component={ShoppingListDetail}/>
                         <Route path="/shoppinglists" component={ShoppingList}/>
-                        {/*<Route path="/dashboard/account/edit" component={EditAccount}/>*/}
+                        <Route path="/dashboard/account/edit" component={EditAccount}/>
                         {/*<Route path="/forgot-password/reset-token/show" component={ShowResetToken}/>*/}
                         {/*<Route path="/forgot-password/reset" component={ResetPassword}/>*/}
                         {/*<Route path="/forgot-password" component={GetResetToken}/>*/}
