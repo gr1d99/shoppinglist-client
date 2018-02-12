@@ -1,10 +1,10 @@
-import { alertsReducer } from "./alerts";
-import { initialState } from "./alerts";
+import { alertsReducer } from "../alerts";
+import { initialState } from "../alerts";
 import {
     SUCCESS_ALERT,
     WARNING_ALERT,
     ERROR_ALERT,
-    CLEAR_ALERT } from "../actions/ActionTypes";
+    CLEAR_ALERT } from "../../actions/ActionTypes";
 
 
 describe('Alert reducer', () => {

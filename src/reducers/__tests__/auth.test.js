@@ -1,5 +1,5 @@
-import * as types  from "../actions/ActionTypes";
-import { Authenticate, _auth } from "./auth";
+import * as types  from "../../actions/ActionTypes";
+import { Authenticate, _auth } from "../auth";
 
 
 describe('Authentication reducer', () => {
