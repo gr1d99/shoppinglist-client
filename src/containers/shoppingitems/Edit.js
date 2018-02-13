@@ -7,7 +7,7 @@ import SubmitButton  from '../../components/common/button';
 import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
-class EditShoppingListItem extends React.Component {
+export class EditShoppingListItem extends React.Component {
     constructor(props) {
         super(props);
 
@@ -78,7 +78,7 @@ class EditShoppingListItem extends React.Component {
 
                 <div className="thumbnail shopping-item-edit">
 
-                    <h3 className="text-center">Edit</h3>
+                    <h3 className="text-center heading">Edit</h3>
 
                     <form className="form shopping-item-edit" onSubmit={this.handleSubmit}>
                         <div className="form-group">
@@ -86,6 +86,7 @@ class EditShoppingListItem extends React.Component {
                                 type="text"
                                 className="form-control"
                                 name="name"
+                                id='id_name'
                                 placeholder="Name"
                                 onChange={this.handleChange}
                                 value={this.state.name}/>
@@ -96,6 +97,7 @@ class EditShoppingListItem extends React.Component {
                                 type="number"
                                 className="form-control"
                                 name="price"
+                                id="id_price"
                                 placeholder="Price"
                                 onChange={this.handleChange}
                                 value={this.state.price}
@@ -108,6 +110,7 @@ class EditShoppingListItem extends React.Component {
                                 type="text"
                                 className="form-control"
                                 name="quantity_description"
+                                id="id_quantity"
                                 placeholder="Quantity description"
                                 onChange={this.handleChange}
                                 value={this.state.quantity_description}/>
@@ -118,6 +121,7 @@ class EditShoppingListItem extends React.Component {
                             <input
                                 type="checkbox"
                                 name="bought"
+                                id='id_bought'
                                 onChange={this.handleChange}
                                 checked={this.state.bought}/> Bought
                             {this.getErrorMessages('bought')}
