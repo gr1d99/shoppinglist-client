@@ -7,7 +7,7 @@ import SubmitButton  from '../../components/common/button';
 import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
-class CreateShoppingItem extends React.Component {
+export class CreateShoppingItem extends React.Component {
     constructor (props) {
         super (props);
 
@@ -36,8 +36,8 @@ class CreateShoppingItem extends React.Component {
     };
 
     handleSubmit = (e) => {
-        const shlId = this.props.match.params.id;
         e.preventDefault();
+        const shlId = this.props.match.params.id;
         this.props.createShoppingList(
             this.props.history,
             shlId,
@@ -64,7 +64,7 @@ class CreateShoppingItem extends React.Component {
                 <div className="col-sm-6 col-sm-offset-3">
                     <div className="thumbnail shopping-item-create">
 
-                        <h3 className="text-center">Add Item to Shopping List</h3>
+                        <h3 className="text-center heading">Add Item to Shopping List</h3>
 
                         <form className="form shopping-item-create" onSubmit={this.handleSubmit}>
                             <div className="form-group">
@@ -72,6 +72,7 @@ class CreateShoppingItem extends React.Component {
                                     type="text"
                                     className="form-control"
                                     name="name"
+                                    id="id_name"
                                     placeholder="Name"
                                     onChange={this.handleChange}
                                     value={this.state.name}/>
@@ -80,6 +81,7 @@ class CreateShoppingItem extends React.Component {
                             <div className="form-group">
                                 <input
                                     type="number"
+                                    id="id_price"
                                     className="form-control"
                                     name="price"
                                     placeholder="Price"
@@ -95,6 +97,7 @@ class CreateShoppingItem extends React.Component {
                                     type="text"
                                     className="form-control"
                                     name="quantity"
+                                    id='id_quantity'
                                     placeholder="Quantity description"
                                     onChange={this.handleChange}
                                     value={this.state.quantity}/>
