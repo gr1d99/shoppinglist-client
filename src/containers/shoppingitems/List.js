@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { confirmAlert } from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-import { fetchShoppingItems, getUserShoppingListItemDetail, deleteShoppingItem } from "../../dispatchers";
-import { itemToEditId } from "../../actions";
-import { loginRequired } from "../auth/helpers";
+import { fetchShoppingItems, getUserShoppingListItemDetail, deleteShoppingItem } from "../../dispatchers/index";
+import { itemToEditId } from "../../actions/index";
+import { loginRequired } from "../auth/helpers/index";
 import { backButton } from "../../components/common/BackButton";
 
 export class List extends React.Component {

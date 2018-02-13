@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { createShoppingItem } from "../../dispatchers";
+import { createShoppingItem } from "../../dispatchers/index";
 import SubmitButton  from '../../components/common/button';
-import { loginRequired } from "../auth/helpers";
+import { loginRequired } from "../auth/helpers/index";
 import { backButton } from "../../components/common/BackButton";
 
 export class CreateShoppingItem extends React.Component {
