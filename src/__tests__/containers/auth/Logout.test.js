@@ -4,9 +4,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import { LogoutUserComponent } from './Logout';
-import AppComponent, {App} from "../../components/App";
-import Logout from "./Logout";
+import { LogoutUserComponent } from '../../../src/containers/auth/Logout';
+import AppComponent, {App} from "../../../src/components/App";
+import Logout from "../../../src/containers/auth/Logout";
 
 Enzyme.configure({adapter: new Adapter()});
 

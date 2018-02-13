@@ -3,7 +3,7 @@ import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { BrowserRouter } from 'react-router-dom';
 
-import { SearchShoppingLists } from "./Search";
+import { SearchShoppingLists } from "../../../src/containers/search/Search";
 
 Enzyme.configure({adapter: new Adapter()});
 

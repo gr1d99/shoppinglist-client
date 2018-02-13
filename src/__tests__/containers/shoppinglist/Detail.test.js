@@ -3,7 +3,7 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ShoppingListDetailComponent } from "./Detail";
+import { ShoppingListDetailComponent } from "../../../src/containers/shoppinglist/Detail";
 
 Enzyme.configure({adapter: new Adapter()});
 

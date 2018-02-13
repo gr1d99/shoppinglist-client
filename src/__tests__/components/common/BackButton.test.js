@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { backButton } from '../BackButton';
+import { backButton } from '../../../src/components/common/BackButton';
 
 
 describe('BackButton component', () => {

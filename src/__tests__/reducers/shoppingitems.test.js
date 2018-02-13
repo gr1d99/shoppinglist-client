@@ -1,5 +1,5 @@
-import * as types from '../../actions/ActionTypes'
-import { shoppingItemReducer, initialState } from "../shoppingitems";
+import * as types from '../../src/actions/ActionTypes'
+import { shoppingItemReducer, initialState } from "../../src/reducers/shoppingitems";
 
 
 // tests for shopping items reducer.

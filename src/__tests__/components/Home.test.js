@@ -6,8 +6,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import HomePage from '../Home'
-import App from '../../components/App'
+import HomePage from '../../src/components/Home'
+import App from '../../src/components/App'
 
 
 const middlewares = [];
