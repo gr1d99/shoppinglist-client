@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import { SignUp } from '../Signup'
-import App from '../../../components/App'
 
 
 const middlewares = [];
@@ -59,13 +58,13 @@ describe('form interactions', () => {
         wrapper = shallow(<SignUp auth={auth} registerUser={registerUser}/>)
     });
 
-    it('when submit it should call registerUser function', function () {
-        console.log(wrapper.find('.signup-form'))
+    it('when submit it should call registerUser function', () => {
         expect(wrapper.find('.signup-form').length).toEqual(1)
         wrapper.find('.signup-form').simulate(
             'submit', {preventDefault() {}}
         );
 
         expect(registerUser.mock.calls.length).toBe(1)
-    })
+    });
+
 });
