@@ -6,7 +6,7 @@ const AppLinks = props => {
     if (props.isAuthenticated) {
         return (
             <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/dashboard"><span className="glyphicon glyphicon-dashboard"></span> Dashboard</Link></li>
+                <li><Link to="/dashboard"><span className="glyphicon glyphicon-cog"></span> My Account</Link></li>
                 <li><Link to="/logout"><span className="glyphicon glyphicon-log-out"></span> Logout</Link></li>
             </ul>
         )

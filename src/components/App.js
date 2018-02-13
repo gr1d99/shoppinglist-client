@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import HomePage from '../components/Home';
 import Dashboard from '../components/auth/Dashboard';
-// import GetResetToken from '../components/auth/password/GetResetToken';
-// import ShowResetToken from '../components/auth/password/ShowToken';
+import GetResetToken from '../components/auth/password/GetResetToken';
+import ShowResetToken from '../components/auth/password/ShowToken';
 //
 import AlertMessages from '../containers/utils/messages'
 //
@@ -13,7 +13,7 @@ import SignUp from '../containers/auth/Signup';
 import Login from '../containers/auth/Login';
 import Logout from '../containers/auth/Logout';
 import EditAccount from '../containers/auth/Edit';
-// import ResetPassword from '../containers/auth/password/ResetPassword';
+import ResetPassword from '../containers/auth/password/ResetPassword';
 //
 import ShoppingList from '../containers/shoppinglist/List';
 import CreateShoppingList from '../containers/shoppinglist/Create';
@@ -71,9 +71,9 @@ export class App extends Component {
                         <Route path="/shoppinglists/:id" component={ShoppingListDetail}/>
                         <Route path="/shoppinglists" component={ShoppingList}/>
                         <Route path="/dashboard/account/edit" component={EditAccount}/>
-                        {/*<Route path="/forgot-password/reset-token/show" component={ShowResetToken}/>*/}
-                        {/*<Route path="/forgot-password/reset" component={ResetPassword}/>*/}
-                        {/*<Route path="/forgot-password" component={GetResetToken}/>*/}
+                        <Route path="/forgot-password/reset-token/show" component={ShowResetToken}/>
+                        <Route path="/forgot-password/reset" component={ResetPassword}/>
+                        <Route path="/forgot-password" component={GetResetToken}/>
                         <Route path="/dashboard" component={Dashboard}/>
                     </Switch>
                 </div>
