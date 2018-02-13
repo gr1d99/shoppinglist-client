@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 export class HomePage extends React.Component {
-    getUserName = () => {
+    renderContent = () => {
         switch (this.props.auth.isAuthenticated){
             case false:
                 return (
@@ -17,7 +17,7 @@ export class HomePage extends React.Component {
 
             case true:
                 return (
-                    <span>
+                    <span className="welcome-text">
                         <br/>
                         <br/>
                         Keep track of your shopping list with just few simple steps.
@@ -28,7 +28,7 @@ export class HomePage extends React.Component {
                 );
 
             default:
-                return ''
+                return <div className="error"></div>
         }
     };
 
@@ -40,7 +40,7 @@ export class HomePage extends React.Component {
                         <span className="text-uppercase">Welcome to online shopping list app</span>
                         <br/>
                         <span className="intro-text">
-                            {this.getUserName()}
+                            {this.renderContent()}
                         </span>
                     </h4>
                 </div>
