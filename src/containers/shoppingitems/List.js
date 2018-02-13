@@ -10,7 +10,7 @@ import { itemToEditId } from "../../actions";
 import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
-class List extends React.Component {
+export class List extends React.Component {
 
     componentDidMount = () => {
         const { isAuthenticated } = this.props.auth;
