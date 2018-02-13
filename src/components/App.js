@@ -7,7 +7,7 @@ import Dashboard from '../components/auth/Dashboard';
 // import GetResetToken from '../components/auth/password/GetResetToken';
 // import ShowResetToken from '../components/auth/password/ShowToken';
 //
-// import AlertMessages from '../containers/utils/messages'
+import AlertMessages from '../containers/utils/messages'
 //
 import SignUp from '../containers/auth/Signup';
 import Login from '../containers/auth/Login';
@@ -55,7 +55,7 @@ export class App extends Component {
                 </nav>
                 <div className="container">
                     <div className="col-md-12">
-                        {/*<AlertMessages/>*/}
+                        <AlertMessages/>
                     </div>
                     <Switch>
                         <Route exact path="/" component={HomePage}/>
