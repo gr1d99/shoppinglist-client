@@ -9,7 +9,7 @@ import { searchShoppingLists } from "../../dispatchers";
 import { backButton } from "../../components/common/BackButton";
 
 
-class SearchShoppingLists extends React.Component {
+export class SearchShoppingLists extends React.Component {
     constructor (props) {
         super(props);
 
@@ -83,7 +83,7 @@ class SearchShoppingLists extends React.Component {
                 return this.props.search.results.shoppinglists.map(
                     shl => {
                         return (
-                            <div key={shl.id} className="col-sm-3">
+                            <div key={shl.id} className="col-sm-3 result-item">
                                 <div className="panel panel-default">
                                     <div className="panel-heading">
                                         <h6 className="text-center">
@@ -123,7 +123,7 @@ class SearchShoppingLists extends React.Component {
                 <div className="col-lg-12">
                     {this.pageMetaData('up')}
                 </div>
-                <div className="col-lg-12">
+                <div className="col-lg-12 results">
                     {this.renderSearchResults()}
                 </div>
                 <div className="col-lg-12">
