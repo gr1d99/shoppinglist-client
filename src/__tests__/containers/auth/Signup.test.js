@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import { SignUp } from '../../../src/containers/auth/Signup'
+import { SignUp } from '../../../containers/auth/Signup'
 
 
 const middlewares = [];

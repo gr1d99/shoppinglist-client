@@ -1,5 +1,5 @@
-import { search } from "../../src/reducers/search";
-import { SEARCH, SEARCH_ERROR } from "../../src/actions/ActionTypes";
+import { search } from "../../reducers/search";
+import { SEARCH, SEARCH_ERROR } from "../../actions/ActionTypes";
 
 describe('Search reducer', () => {
     it('should return default state', () => {

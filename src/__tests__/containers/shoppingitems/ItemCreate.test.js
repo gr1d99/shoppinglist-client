@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import { CreateShoppingItem } from "../../../src/containers/shoppingitems/Create";
+import { CreateShoppingItem } from "../../../containers/shoppingitems/Create";
 
 Enzyme.configure({adapter: new Adapter()});
 
