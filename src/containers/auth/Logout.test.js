@@ -6,6 +6,7 @@ import configureStore from 'redux-mock-store';
 
 import { LogoutUserComponent } from './Logout';
 import AppComponent, {App} from "../../components/App";
+import Logout from "./Logout";
 
 Enzyme.configure({adapter: new Adapter()});
 
