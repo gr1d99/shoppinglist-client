@@ -9,7 +9,7 @@ import { conditionedComponents } from "./helpers";
 import { backButton } from "../../components/common/BackButton";
 
 
-class Login extends React.Component {
+export class Login extends React.Component {
 
     constructor (props) {
         super (props);
@@ -54,14 +54,16 @@ class Login extends React.Component {
     render () {
         return (
             <div className="col-sm-6 col-sm-offset-3">
-                <div className="thumbnail signin">
-                    <h3 className="text-center">Login</h3>
+                <div className="thumbnail login">
+                    <h3 className="login-header text-center">Login</h3>
 
-                    <form className="signup-form" method="post" onSubmit={this.handleSubmit}>
+                    <form className="login-form" method="post" onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <input type="text"
+                                   value={this.props.username}
                                    className="form-control"
                                    name="username"
+                                   id='id_username'
                                    placeholder="Your username"
                                    onChange={this.handleChange}/>
                             {this.getErrorMessages('username')}
@@ -69,8 +71,10 @@ class Login extends React.Component {
 
                         <div className="form-group">
                             <input type="password"
+                                   id='id_password'
                                    className="form-control"
                                    name="password"
+                                   value={this.props.password}
                                    placeholder="Your password"
                                    onChange={this.handleChange}/>
                             {this.getErrorMessages('password')}

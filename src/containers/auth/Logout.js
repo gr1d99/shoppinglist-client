@@ -6,14 +6,13 @@ import { LogoutUser} from "../../dispatchers";
 import { loginRequired } from "./helpers";
 import { backButton } from "../../components/common/BackButton";
 
-class LogoutUserComponent extends React.Component {
+export class LogoutUserComponent extends React.Component {
 
     handleLogout = () => {
         this.props.LogoutUser(this.props.history)
     };
 
     getErrorMessage = () => {
-        console.log(this.props.auth);
         if (this.props.auth.login_errors) {
             if (this.props.auth.login_errors.message) {
                 return (
@@ -26,7 +25,7 @@ class LogoutUserComponent extends React.Component {
     render () {
         return (
             <div className="text-center">
-                <h2>Sign Out</h2>
+                <h2 className="logout-heading">Sign Out</h2>
 
                 {this.getErrorMessage()}
 
