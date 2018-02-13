@@ -8,26 +8,15 @@ import { backButton } from "../../components/common/BackButton";
 
 export class LogoutUserComponent extends React.Component {
 
-    handleLogout = () => {
+    handleLogout = e => {
+        e.preventDefault();
         this.props.LogoutUser(this.props.history)
-    };
-
-    getErrorMessage = () => {
-        if (this.props.auth.login_errors) {
-            if (this.props.auth.login_errors.message) {
-                return (
-                    <p className="text-danger text-justified">{this.props.auth.login_errors.message}</p>
-                )
-            }
-        }
     };
 
     render () {
         return (
             <div className="text-center">
                 <h2 className="logout-heading">Sign Out</h2>
-
-                {this.getErrorMessage()}
 
                 <button onClick={this.handleLogout} className="btn btn-danger">Logout</button>
             </div>
