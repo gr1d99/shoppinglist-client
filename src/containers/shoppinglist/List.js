@@ -9,7 +9,7 @@ import { getUserShoppingLists } from "../../dispatchers";
 import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
-class List extends React.Component {
+export class List extends React.Component {
 
     componentWillMount = () => {
         const { isAuthenticated } = this.props.auth;
@@ -75,7 +75,7 @@ class List extends React.Component {
             return this.props.shoppingList.data.map(
                 shl => {
                     return (
-                        <div key={shl.id} className="col-sm-3">
+                        <div key={shl.id} className="col-sm-3 shl">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <h6 className="text-center">

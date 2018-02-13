@@ -9,7 +9,7 @@ import { getUserShoppingListDetail, deleteShoppingList } from "../../dispatchers
 import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
-class ShoppingListDetailComponent extends React.Component {
+export class ShoppingListDetailComponent extends React.Component {
 
     componentWillMount = () => {
         const { isAuthenticated } = this.props.auth;
@@ -26,10 +26,6 @@ class ShoppingListDetailComponent extends React.Component {
                 return this.props.history.push('/login');
         }
     };
-
-    componentWillReceiveProps = (nextProps) => {
-        console.log(this.props.shoppingList.shlDetail)
-    }
 
     handleDelete = (e) => {
         e.preventDefault();
@@ -103,6 +99,7 @@ class ShoppingListDetailComponent extends React.Component {
                                     </Link>
                                     <br/>
                                     <button
+                                        id="id_delete"
                                         className="btn btn-danger btn-xs" onClick={this.handleDelete}>
                                         <span className="glyphicon glyphicon-trash"></span> Delete
                                     </button>

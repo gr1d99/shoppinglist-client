@@ -8,7 +8,7 @@ import { ERROR_ALERT, SUCCESS_ALERT, WARNING_ALERT } from "../../actions/ActionT
 const TIMEOUT = 5000;
 
 
-class AlertMessages extends React.Component {
+export class AlertMessages extends React.Component {
     displayAlerts = () => {
         switch (this.props.alerts.category) {
             case SUCCESS_ALERT:
