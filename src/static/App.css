@@ -17,6 +17,7 @@ span.text-center.page-info {
     margin-left: 7px;
 }
 
+form.login-form,
 form.signup-form,
 form.shoppinglist-create,
 form.shoppinglist-edit,
@@ -31,6 +32,7 @@ form.account-password-reset-form{
     padding-bottom: 40px;
 }
 
+.thumbnail.login,
 .thumbnail.signup,
 .thumbnail.account-edit,
 .thumbnail.shoppinglist-create,
