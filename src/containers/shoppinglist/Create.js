@@ -8,7 +8,7 @@ import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
 
-class CreateShoppingList extends React.Component {
+export class CreateShoppingList extends React.Component {
     constructor (props) {
         super (props);
 
@@ -58,6 +58,7 @@ class CreateShoppingList extends React.Component {
                             <div className="form-group">
                                 <input
                                     type="text"
+                                    id="id_name"
                                     className="form-control"
                                     name="name"
                                     placeholder="Name"
@@ -73,6 +74,7 @@ class CreateShoppingList extends React.Component {
                             <textarea
                                 className="form-control"
                                 name="description"
+                                id="id_description"
                                 placeholder="Description"
                                 onChange={this.handleChange}
                                 value={this.state.description}/>
