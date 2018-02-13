@@ -22,7 +22,8 @@ describe('<HomePage/> when logged out', () => {
     let initialState = {
         auth: {
             isAuthenticated: false
-        }
+        },
+        alerts: {}
     };
 
     beforeEach(() => {
@@ -57,7 +58,8 @@ describe('<HomePage/> when logged in', () => {
     let initialState = {
         auth: {
             isAuthenticated: true
-        }
+        },
+        alerts: {}
     };
 
     beforeEach(() => {
@@ -82,7 +84,8 @@ describe('<Home/> Errors', () => {
     let initialState = {
         auth: {
             isAuthenticated: 123
-        }
+        },
+        alerts: {}
     };
 
     beforeEach(() => {

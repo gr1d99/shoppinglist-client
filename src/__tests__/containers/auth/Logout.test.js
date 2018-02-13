@@ -19,7 +19,8 @@ const setup = (connected=false) => {
     let initialState = {
         auth: {
             isAuthenticated: false
-        }
+        },
+        alerts: {}
     };
     mockStore = configureStore(middlewares);
     store = mockStore(initialState);
@@ -80,7 +81,7 @@ describe('<Logout/> component', () => {
     });
 
     describe('<Logout/> container when connected', () => {
-        const { enzymeWrapper, store } = setup(true);
+        const { enzymeWrapper } = setup(true);
         it('should render as expected', () => {
             // simulate submission
             expect(enzymeWrapper.length).toEqual(1);
