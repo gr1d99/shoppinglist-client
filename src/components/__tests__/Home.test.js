@@ -24,6 +24,7 @@ describe('<HomePage/> when logged out', () => {
             isAuthenticated: false
         }
     };
+
     beforeEach(() => {
         store = mockStore(initialState);
         wrapper = mount(
@@ -83,6 +84,7 @@ describe('<Home/> Errors', () => {
             isAuthenticated: 123
         }
     };
+
     beforeEach(() => {
         store = mockStore(initialState);
         wrapper = mount(
