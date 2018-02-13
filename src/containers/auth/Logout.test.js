@@ -5,25 +5,29 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import { LogoutUserComponent } from './Logout';
-import {LogoutUser} from "../../dispatchers";
+import AppComponent, {App} from "../../components/App";
 
 Enzyme.configure({adapter: new Adapter()});
 
 const setup = (connected=false) => {
-    const middlewares = [];
-    const mockStore = configureStore(middlewares);
     const props = {
         auth: {},
         LogoutUser: jest.fn()};
-    const store = mockStore(props);
-    let enzymeWrapper;
+    let enzymeWrapper, mockStore, store;
+    const middlewares = [];
+    let initialState = {
+        auth: {
+            isAuthenticated: false
+        }
+    };
+    mockStore = configureStore(middlewares);
+    store = mockStore(initialState);
 
     switch (connected){
-
         case true:
             enzymeWrapper = mount(
                 <Provider store={store}>
-                    <LogoutUserComponent {...props}/>
+                    <AppComponent/>
                 </Provider>
             );
             return {enzymeWrapper};
@@ -74,7 +78,7 @@ describe('<Logout/> component', () => {
         })
     });
 
-    describe('<Logout/> container', () => {
+    describe('<Logout/> container when connected', () => {
         const { enzymeWrapper, store } = setup(true);
         it('should render as expected', () => {
             // simulate submission
