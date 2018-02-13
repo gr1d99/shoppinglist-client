@@ -45,14 +45,11 @@ describe('<HomePage/> when logged out', () => {
     });
 
     it('a tag should be only 2', () => {
-        expect(wrapper.find('HomePage').find('a').length).toEqual(2)
-    });
-
         // <a> tags in home page by default are 2
         expect(wrapper.find('HomePage').find('a').length).toEqual(2)
     });
 
-});
+})
 
 describe('<HomePage/> when logged in', () => {
     let store, wrapper;
@@ -97,7 +94,6 @@ describe('<Home/> Errors', () => {
 
     it('display nothing if isAuthenticated property is unknown', () => {
         // if isAuthenticated is not a boolean nothing should be displayed
-        expect(wrapper.find('HomePage').contains(<div className="error" />)).toEqual(true);
-    });
-
-});
+        expect(wrapper.find('HomePage').contains(<div className="error"/>)).toEqual(true)
+    })
+})
