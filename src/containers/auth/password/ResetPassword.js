@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { backButton } from "../../../components/common/BackButton";
 import SubmitButton  from '../../../components/common/Button';
 import { resetUserPassword } from "../../../dispatchers";
-
+import Loading from '../../../components/common/Loading'
+import * as actions from "../../../actions";
 
 class ResetPassword extends React.Component {
     /* Takes in input required to reset the user and posts them
@@ -39,6 +40,7 @@ class ResetPassword extends React.Component {
 
         e.preventDefault();
         this.props.resetUserPassword(this.props.history, this.state);
+        this.props.dispatch(actions.activateLoading()) // activate loading
     };
 
     getErrorMessages = field => {
@@ -103,10 +105,13 @@ class ResetPassword extends React.Component {
                             {this.getErrorMessages('reset_token')}
                         </div>
 
-                        <SubmitButton
-                            type='submit'
-                            className='btn btn-success'
-                            value='Proceed'/>
+                        {this.props.loader.isLoading ? <Loading/> :
+                            <SubmitButton
+                                type='submit'
+                                className='btn btn-success'
+                                value='Proceed'/>
+                        }
+
                     </form>
 
                 </div>
@@ -118,12 +123,13 @@ class ResetPassword extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        resetUserPassword: bindActionCreators(resetUserPassword, dispatch)
+        resetUserPassword: bindActionCreators(resetUserPassword, dispatch),
+        dispatch
     }
 };
 
-const mapStateToProps = ({auth}) => {
-    return {auth}
+const mapStateToProps = ({auth, loader}) => {
+    return {auth, loader}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(backButton(ResetPassword));

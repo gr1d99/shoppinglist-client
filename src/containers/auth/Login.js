@@ -7,6 +7,8 @@ import SubmitButton  from '../../components/common/Button';
 import { LoginUser } from "../../dispatchers";
 import { conditionedComponents } from "./helpers";
 import { backButton } from "../../components/common/BackButton";
+import Loading from '../../components/common/Loading'
+import * as actions from "../../actions";
 
 
 export class Login extends React.Component {
@@ -33,6 +35,7 @@ export class Login extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.loginUser(this.props.history, this.state);
+        this.props.dispatch(actions.activateLoading()) // activate loading immediately.
     };
 
     getErrorMessages = field => {
@@ -53,58 +56,60 @@ export class Login extends React.Component {
     };
 
     render () {
-        return (
-            <div className="col-sm-6 col-sm-offset-3">
-                <div className="thumbnail login">
-                    <h3 className="login-header text-center">Login</h3>
+            return (
+                <div className="col-sm-6 col-sm-offset-3">
+                    <div className="thumbnail login">
+                        <h3 className="login-header text-center">Login</h3>
 
-                    <form className="login-form" method="post" onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                            <input type="text"
-                                   value={this.props.username}
-                                   className="form-control"
-                                   name="username"
-                                   id='id_username'
-                                   placeholder="Your username"
-                                   onChange={this.handleChange}/>
-                            {this.getErrorMessages('username')}
-                        </div>
+                        <form className="login-form" method="post" onSubmit={this.handleSubmit}>
+                            <div className="form-group">
+                                <input type="text"
+                                       value={this.props.username}
+                                       className="form-control"
+                                       name="username"
+                                       id='id_username'
+                                       placeholder="Your username"
+                                       onChange={this.handleChange}/>
+                                {this.getErrorMessages('username')}
+                            </div>
 
-                        <div className="form-group">
-                            <input type="password"
-                                   id='id_password'
-                                   className="form-control"
-                                   name="password"
-                                   value={this.props.password}
-                                   placeholder="Your password"
-                                   onChange={this.handleChange}/>
-                            {this.getErrorMessages('password')}
-                        </div>
+                            <div className="form-group">
+                                <input type="password"
+                                       id='id_password'
+                                       className="form-control"
+                                       name="password"
+                                       value={this.props.password}
+                                       placeholder="Your password"
+                                       onChange={this.handleChange}/>
+                                {this.getErrorMessages('password')}
+                            </div>
+                            {this.props.loader.isLoading ? <Loading/>:
+                            <SubmitButton
+                                type='submit'
+                                className='btn btn-success'
+                                value='Login'/>
+                            }
 
-                        <SubmitButton
-                            type='submit'
-                            className='btn btn-success'
-                            value='Login'/>
+                            <Link to="/forgot-password" className="pull-right">Forgot Password</Link>
 
-                        <Link to="/forgot-password" className="pull-right">Forgot Password</Link>
+                        </form>
 
-                    </form>
-
+                    </div>
                 </div>
-            </div>
 
-        );
+            );
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        loginUser: bindActionCreators(LoginUser, dispatch)
+        loginUser: bindActionCreators(LoginUser, dispatch),
+        dispatch
     }
 };
 
-const mapStateToProps = ({auth}) => {
-    return {auth}
+const mapStateToProps = ({auth, loader}) => {
+    return {auth, loader}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(conditionedComponents(backButton(Login)))

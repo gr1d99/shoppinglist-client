@@ -92,3 +92,7 @@ form.account-password-reset-form{
     line-height: 65px;
     z-index: 0;
 }
+
+#items-list_filter{
+    text-align: center;
+}

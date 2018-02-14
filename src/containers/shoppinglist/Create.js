@@ -6,7 +6,8 @@ import { createShoppingList} from "../../dispatchers";
 import SubmitButton from '../../components/common/Button'
 import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
-
+import Loading from '../../components/common/Loading'
+import * as actions from "../../actions";
 
 export class CreateShoppingList extends React.Component {
     /* Handle creation of shopping list functionality */
@@ -36,7 +37,8 @@ export class CreateShoppingList extends React.Component {
         /* Submit form data to backend */
 
         e.preventDefault();
-        this.props.createShoppingList(this.props.history, this.state)
+        this.props.createShoppingList(this.props.history, this.state);
+        this.props.dispatch(actions.activateLoading()) // activate loading
     };
 
     getErrorMessages = field => {
@@ -90,10 +92,12 @@ export class CreateShoppingList extends React.Component {
                                 value={this.state.description}/>
                             </div>
 
-                            <SubmitButton
-                                type='submit'
-                                className='btn btn-success'
-                                value='Submit' />
+                            {this.props.loader.isLoading ? <Loading/> :
+                                <SubmitButton
+                                    type='submit'
+                                    className='btn btn-success'
+                                    value='Submit'/>
+                            }
 
                         </form>
 
@@ -105,13 +109,14 @@ export class CreateShoppingList extends React.Component {
     }
 }
 
-const mapStateToProps = ({shoppingList, auth}) => {
-    return {shoppingList, auth}
+const mapStateToProps = ({shoppingList, auth, loader}) => {
+    return {shoppingList, auth, loader}
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         createShoppingList: bindActionCreators(createShoppingList, dispatch),
+        dispatch
     }
 };
 

@@ -8,6 +8,7 @@ import { shoppingItemReducer} from "./shoppingitems";
 import { alertsReducer } from "./alerts";
 import { cleanup } from "./cleanup";
 import { search } from "./search";
+import { loader} from "./loader";
 
 export default combineReducers({
     auth,
@@ -15,5 +16,6 @@ export default combineReducers({
     shoppingItem: shoppingItemReducer,
     alerts: alertsReducer,
     cleanup,
-    search
+    search,
+    loader
 });

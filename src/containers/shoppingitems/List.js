@@ -10,6 +10,8 @@ import { itemToEditId } from "../../actions/index";
 import { loginRequired } from "../auth/helpers/index";
 import { backButton } from "../../components/common/BackButton";
 
+import DataTable, { destroyDataTable} from './initItems';
+
 export class List extends React.Component {
     /* Handles shopping items retrieval */
 
@@ -33,6 +35,15 @@ export class List extends React.Component {
                 return this.props.history.push('/login');
         }
     };
+
+    componentWillUpdate() {
+        destroyDataTable("#items-list");
+    }
+
+
+    componentDidUpdate() {
+        DataTable("#items-list");
+    }
 
     handleEditClick = (shlId, itemId) => e => {
         /* Take user to item edit page and also fetch shopping item details */
@@ -78,12 +89,12 @@ export class List extends React.Component {
                                     <Link id="btn edit-item" onClick={this.handleEditClick(shlId, id)}
                                           className='btn btn-info btn-xs'
                                           to={`../../shoppinglists/${shlId}/items/${id}/edit`}>
-                                        Edit
+                                        <span className="glyphicon glyphicon-pencil"></span>
                                     </Link>
                                     <button id="btn edit-delete"
                                             className='btn btn-danger btn-xs'
                                             onClick={this.handleDelete(shlId, id)}>
-                                        Delete
+                                        <span className="glyphicon glyphicon-trash"></span>
                                     </button>
                                 </td>
                             </tr>
@@ -108,9 +119,9 @@ export class List extends React.Component {
                     <br/>
                 </div>
                 <div className="col-lg-12">
-                    <table className="table table-hover">
+                    <table className="table table-hover" id="items-list">
                         <caption className="text-center">
-                            <h4>Items {this.pageMetaData('up')}</h4>
+                            <h4>Items</h4>
                         </caption>
                         <thead>
                         <tr>
@@ -127,9 +138,7 @@ export class List extends React.Component {
                         {this.renderShoppingItems()}
                         </tbody>
                     </table>
-                    <div className="col-lg-12">
-                        { this.pageMetaData('down') }
-                    </div>
+
                 </div>
             </div>
         )
