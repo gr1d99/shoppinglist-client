@@ -7,6 +7,7 @@ import SubmitButton  from '../../components/common/button';
 import { registerUser } from "../../dispatchers";
 import { conditionedComponents } from "./helpers";
 import { backButton } from "../../components/common/BackButton";
+import Loading from '../../components/common/Loading'
 
 export class SignUp extends React.Component {
 
@@ -68,63 +69,71 @@ export class SignUp extends React.Component {
     };
 
     render () {
-        return (
+        // switch ()
+        switch (this.props.auth.isLoading) {
+            case true:
+                return <Loading/>
 
-            <div className="col-sm-6 col-sm-offset-3">
-                <div className="thumbnail signup">
+            case false:
+            default:
+                return (
+                    <div className="col-sm-6 col-sm-offset-3">
+                        <div className="thumbnail signup">
 
+                            <h3 className="text-center">Signup</h3>
 
-                    <h3 className="text-center">Signup</h3>
+                            <form className="signup-form" method="post" onSubmit={this.handleSubmit}>
+                                <div className="form-group">
+                                    <input type="text"
+                                           className="form-control"
+                                           name="username"
+                                           placeholder="Your username"
+                                           onChange={this.handleChange}/>
+                                    {this.getErrorMessages('username')}
+                                </div>
 
-                    <form className="signup-form" method="post" onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                            <input type="text"
-                                   className="form-control"
-                                   name="username"
-                                   placeholder="Your username"
-                                   onChange={this.handleChange}/>
-                            {this.getErrorMessages('username')}
+                                <div className="form-group">
+                                    <input type="email"
+                                           className="form-control"
+                                           name="email"
+                                           placeholder="Your email"
+                                           onChange={this.handleChange}/>
+                                    {this.getErrorMessages('email')}
+                                </div>
+
+                                <div className="form-group">
+                                    <input type="password"
+                                           className="form-control"
+                                           name="password"
+                                           placeholder="Your password"
+                                           onChange={this.handleChange}/>
+                                    {this.getErrorMessages('password')}
+                                </div>
+
+                                <div className="form-group">
+                                    <input type="password"
+                                           className="form-control"
+                                           name="confirm"
+                                           placeholder="Confirm password"
+                                           onChange={this.handleChange}/>
+                                    {this.getErrorMessages('confirm')}
+                                </div>
+
+                                <SubmitButton
+                                    type='submit'
+                                    className='btn btn-success'
+                                    value='Create Account'/>
+
+                                <p className="pull-right">Have an account? <span><Link to="/login">Login</Link></span>
+                                </p>
+                            </form>
+
                         </div>
+                    </div>
 
-                        <div className="form-group">
-                            <input type="email"
-                                   className="form-control"
-                                   name="email"
-                                   placeholder="Your email"
-                                   onChange={this.handleChange}/>
-                            {this.getErrorMessages('email')}
-                        </div>
+                );
 
-                        <div className="form-group">
-                            <input type="password"
-                                   className="form-control"
-                                   name="password"
-                                   placeholder="Your password"
-                                   onChange={this.handleChange}/>
-                            {this.getErrorMessages('password')}
-                        </div>
-
-                        <div className="form-group">
-                            <input type="password"
-                                   className="form-control"
-                                   name="confirm"
-                                   placeholder="Confirm password"
-                                   onChange={this.handleChange}/>
-                            {this.getErrorMessages('confirm')}
-                        </div>
-
-                        <SubmitButton
-                            type='submit'
-                            className='btn btn-success'
-                            value='Create Account'/>
-
-                        <p className="pull-right">Have an account? <span><Link to="/login">Login</Link></span></p>
-                    </form>
-
-                </div>
-            </div>
-
-        );
+        }
     }
 }
 

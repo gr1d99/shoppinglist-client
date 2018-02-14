@@ -31,7 +31,7 @@ export const LoginUserError = error => {
 };
 
 
-export const LogoutUserSuccess = response => {
+export const LogoutUserSuccess = () => {
     localStorage.clear();
     return {
         type: types.LOGOUT,
@@ -84,7 +84,7 @@ export const deleteUserAccountSuccess = response => {
 
 export const deleteUserAccountError = error => {
     return {
-        type: types.DELETE_USER_ACCOUNT,
+        type: types.DELETE_USER_ACCOUNT_ERROR,
         payload: error.response.data
     }
 }
@@ -266,7 +266,7 @@ export const itemToEditId = id => {
         type: types.ITEM_ID,
         payload: id
     }
-}
+};
 
 
 // SHOPPING LISTS SEARCH ACTION CREATORS.
@@ -324,10 +324,11 @@ export const failedOperation = error => {
 };
 
 export const clearAlertMessage = () => {
+    // action creator to clear any alert message
     return {
         type: types.CLEAR_ALERT
     }
-}
+};
 
 // actions creators for clearing internal state such as form data after the
 // operation has succeeded.
@@ -336,3 +337,16 @@ export const clearInternalState = () => {
         type: types.CLEAR_INTERNAL_STATE
     }
 };
+
+export const activateLoading = () => {
+    return {
+        type: types.IS_LOADING
+    }
+};
+
+export const deactivateLoading = () => {
+    return {
+        type: types.IS_NOT_LOADING
+    }
+};
+

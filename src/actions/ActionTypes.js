@@ -63,3 +63,6 @@ export const ERROR_ALERT = 'ERROR_ALERT';
 export const WARNING_ALERT = 'WARNING_ALERT';
 
 export const CLEAR_INTERNAL_STATE = 'CLEAR_INTERNAL_STATE';
+
+export const IS_LOADING = 'IS_LOADING';
+export const IS_NOT_LOADING = 'IS_NOT_LOADING';

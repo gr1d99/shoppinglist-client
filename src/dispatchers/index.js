@@ -19,6 +19,7 @@ export const registerUser = (history, data) => {
     registerData.set('confirm', data.confirm);
 
     return dispatch => {
+        // activate loading immediately.
         axios.post(
             `${URL}${_prefix}`, registerData, {
                 headers: {
@@ -28,15 +29,16 @@ export const registerUser = (history, data) => {
                 }
             })
             .then(response => {
+                dispatch(actions.activateLoading());
                 dispatch(actions.RegisterUserSuccess(response));
-                dispatch(actions.successfulOperation(msgs.ACCOUNT_CREATED))
-                dispatch(actions.clearInternalState())
+                dispatch(actions.successfulOperation(msgs.ACCOUNT_CREATED));
+                dispatch(actions.clearInternalState());
+                dispatch(actions.deactivateLoading());
                 history.push('/login');
             })
             .catch(error => {
-                console.log(error.response)
                 history.push('/signup');
-                dispatch(actions.RegisterUserError(error))
+                dispatch(actions.RegisterUserError(error));
                 dispatch(actions.failedOperation(error))
             })
     }
@@ -87,8 +89,8 @@ export const LogoutUser = (history) => {
                 }
             })
             .then(response => {
-                dispatch(actions.LogoutUserSuccess(response));
-                dispatch(actions.successfulOperation(msgs.LOGGED_OUT))
+                dispatch(actions.LogoutUserSuccess());
+                dispatch(actions.successfulOperation(msgs.LOGGED_OUT));
                 history.push('/');
                 window.location.reload()
             })

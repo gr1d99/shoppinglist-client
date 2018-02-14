@@ -7,7 +7,7 @@ describe('Authentication reducer', () => {
         expect(
             Authenticate(undefined, {type: 'unknown'})
         ).toEqual(
-            {isAuthenticated: _auth, userDetail: null, password_reset_token: ''}
+            {isAuthenticated: _auth, isLoading:false, userDetail: null, password_reset_token: ''}
         )
     })
 
@@ -15,7 +15,7 @@ describe('Authentication reducer', () => {
         expect(
             Authenticate(undefined, {type: types.LOGIN})
         ).toEqual(
-            {isAuthenticated: _auth, userDetail: null, password_reset_token: ''}
+            {isAuthenticated: _auth, isLoading:false, userDetail: null, password_reset_token: ''}
         )
     })
 
@@ -23,7 +23,7 @@ describe('Authentication reducer', () => {
         expect(
             Authenticate(undefined, {type: types.LOGOUT})
         ).toEqual(
-            {isAuthenticated: _auth, userDetail: null, password_reset_token: ''}
+            {isAuthenticated: _auth, isLoading: false, userDetail: null, password_reset_token: ''}
         )
     })
 
@@ -31,7 +31,7 @@ describe('Authentication reducer', () => {
         expect(
             Authenticate(undefined, {type: types.SIGNUP})
         ).toEqual(
-            {isAuthenticated: _auth, userDetail: null, password_reset_token: ''}
+            {isAuthenticated: _auth, isLoading: false, userDetail: null, password_reset_token: ''}
         )
     })
 
@@ -65,7 +65,7 @@ describe('Authentication reducer', () => {
                 data: 'gideon'
                     }}})
         ).toEqual(
-            {isAuthenticated: _auth, userDetail: 'gideon', password_reset_token: ''}
+            {isAuthenticated: _auth, isLoading: false, userDetail: 'gideon', password_reset_token: ''}
         )
     })
 
@@ -73,7 +73,7 @@ describe('Authentication reducer', () => {
         expect(
             Authenticate(undefined, {type: types.USER_INFO_ERROR, payload: 'invalid details'})
         ).toEqual(
-            {isAuthenticated: _auth, userDetail: null, password_reset_token: '', edit_errors: 'invalid details'}
+            {isAuthenticated: _auth, isLoading: false, userDetail: null, password_reset_token: '', edit_errors: 'invalid details'}
         )
     })
 
@@ -81,7 +81,7 @@ describe('Authentication reducer', () => {
         expect(
             Authenticate(undefined, {type: types.GET_RESET_TOKEN, payload: {data: {data: {password_reset_token: '123'}}}})
         ).toEqual(
-            {isAuthenticated: _auth, userDetail: null, password_reset_token: '123'}
+            {isAuthenticated: _auth, userDetail: null, isLoading:false, password_reset_token: '123'}
         )
     })
 
@@ -97,7 +97,7 @@ describe('Authentication reducer', () => {
         expect(
             Authenticate(undefined, {type: types.RESET_PASSWORD})
         ).toEqual(
-            {isAuthenticated: _auth, userDetail: null, password_reset_token: ''}
+            {isAuthenticated: _auth, isLoading: false, userDetail: null, password_reset_token: ''}
         )
     })
 
