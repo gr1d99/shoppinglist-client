@@ -19,7 +19,9 @@ const setup = () => {
         shoppingItem: shoppingItem,
         auth: {isAuthenticated: true},
         updateShoppingListItem: jest.fn(),
-        match: {params: {id: 1}}
+        match: {params: {id: 1}},
+        loader: {},
+        dispatch: jest.fn()
     };
 
     let enzymeWrapper;

@@ -16,7 +16,8 @@ const setup = () => {
             }
         },
         auth: {isAuthenticated: true},
-        createShoppingList: jest.fn()
+        createShoppingList: jest.fn(),
+        loader: {}
     };
 
     let enzymeWrapper;
