@@ -32,8 +32,7 @@ export const backButton = WrappedClass => {
                     <button
                         className="btn btn-default btn-xs pull-left"
                         onClick={this.goBack}>
-                        <span className="glyphicon glyphicon-arrow-left"></span>
-                        Go back
+                        <span className="glyphicon glyphicon-arrow-left"></span> Go back
                     </button>
                     <WrappedClass {...this.props}/>
                 </div>
