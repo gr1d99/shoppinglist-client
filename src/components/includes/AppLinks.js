@@ -14,16 +14,14 @@ const AppLinks = props => {
                 <li>
                     <Link
                         to="/dashboard">
-                        <span className="glyphicon glyphicon-cog"></span>
-                        My Account
+                        <span className="glyphicon glyphicon-cog"></span> My Account
                     </Link>
                 </li>
 
                 <li>
                     <Link
                         to="/logout">
-                        <span className="glyphicon glyphicon-log-out"></span>
-                        Logout
+                        <span className="glyphicon glyphicon-log-out"></span> Logout
                     </Link>
                 </li>
 
@@ -38,16 +36,14 @@ const AppLinks = props => {
 
                     <Link
                         to="/signup">
-                        <span className="glyphicon glyphicon-export"></span>
-                        Sign Up
+                        <span className="glyphicon glyphicon-export"></span> Sign Up
                     </Link>
                 </li>
 
                 <li>
                     <Link
                         to="/login">
-                        <span className="glyphicon glyphicon-log-in"></span>
-                        Login
+                        <span className="glyphicon glyphicon-log-in"></span> Login
                     </Link>
                 </li>
 

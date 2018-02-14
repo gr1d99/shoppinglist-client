@@ -53,8 +53,7 @@ export class App extends Component {
                                     <span className="icon-bar"></span>
                                 </button>
                                 <Link className="navbar-brand" to="/">
-                                    <span className="glyphicon glyphicon-home"></span>
-                                    Shopping List
+                                    <span className="glyphicon glyphicon-home"></span> Shopping List
                                 </Link>
                                 <ShoppingListsLink isAuthenticated={this.props.auth.isAuthenticated}/>
                             </div>
