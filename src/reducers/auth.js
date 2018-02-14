@@ -2,7 +2,7 @@ import * as types  from "../actions/ActionTypes";
 
 export let _auth = !(localStorage.getItem('apiKey') === null);
 
-const initialState = {
+export const initialState = {
     isAuthenticated: _auth,
     userDetail: null,
     password_reset_token: '',

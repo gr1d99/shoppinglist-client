@@ -28,7 +28,7 @@ describe('Shopping list reducer', () => {
         const payload = 'failed';
         expect(shoppingListReducer(
             undefined, {type: types.CREATE_SHOPPINGLIST_ERROR, payload}))
-            .toEqual({"error_messages": payload, "shlDetail": {}})
+            .toEqual({success_message: "", error_messages: payload, shlDetail: {}})
     })
 
     it('should handle FETCH_SHOPPINGLISTS', () => {
@@ -54,6 +54,7 @@ describe('Shopping list reducer', () => {
             undefined, {type: types.SHOPPINGLIST_DETAIL, payload}))
             .toEqual({
                 error_messages: '',
+                success_message: '',
                 shlDetail: payload.data.data
             })
     })
@@ -73,6 +74,7 @@ describe('Shopping list reducer', () => {
             undefined, {type: types.UPDATE_SHOPPINGLIST, payload}))
             .toEqual({
                 error_messages: '',
+                success_message: "",
                 shlDetail: payload.data.data
             })
     })
