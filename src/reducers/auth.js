@@ -2,9 +2,27 @@ import * as types  from "../actions/ActionTypes";
 
 export let _auth = !(localStorage.getItem('apiKey') === null);
 
-export const Authenticate = (
-    state={isAuthenticated: _auth, userDetail: null, password_reset_token: ''}, action) => {
+const initialState = {
+    isAuthenticated: _auth,
+    userDetail: null,
+    password_reset_token: '',
+    isLoading: false
+}
+
+export const Authenticate = (state=initialState, action) => {
     switch (action.type) {
+        case types.IS_LOADING:
+            return {
+                ...state,
+                isLoading: true
+            };
+
+        case types.IS_NOT_LOADING:
+            return {
+                ...state,
+                isLoading: false
+            };
+
         case types.LOGIN:
             return Object.assign({}, state, {
                 isAuthenticated: _auth
