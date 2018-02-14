@@ -2,7 +2,7 @@
 
 import * as types from '../actions/ActionTypes';
 
-const initialState = {
+export const initialState = {
     isLoading: false
 };
 
