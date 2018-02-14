@@ -7,6 +7,7 @@ import { loginRequired } from "./helpers";
 import { backButton } from "../../components/common/BackButton";
 
 export class LogoutUserComponent extends React.Component {
+    /* Handles user logout functionality */
 
     handleLogout = e => {
         e.preventDefault();

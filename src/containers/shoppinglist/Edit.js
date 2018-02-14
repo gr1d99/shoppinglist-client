@@ -7,6 +7,8 @@ import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
 class EditShoppingList extends React.Component {
+    /* Render shopping list edit form */
+
     constructor(props) {
         super(props);
 
@@ -20,8 +22,11 @@ class EditShoppingList extends React.Component {
     }
 
     componentWillMount = () => {
+        /* Fetch user shopping list before component mounts */
 
         const {isAuthenticated} = this.props.auth;
+
+        /* Check if user is authenticated */
         switch (isAuthenticated) {
             case true:
                 const shlId = this.props.match.params.id;
@@ -42,6 +47,8 @@ class EditShoppingList extends React.Component {
     };
 
     handleChange = e => {
+        /* Listen for changes in edit form and update component state */
+
         const key = e.target.name;
         const value = e.target.value;
         let obj = {};
@@ -51,7 +58,10 @@ class EditShoppingList extends React.Component {
     };
 
     handleSubmit = e => {
-        const shlId = this.props.match.params.id
+        /* Submit new changes */
+
+        const shlId = this.props.match.params.id;
+
         e.preventDefault();
         this.props.updateShoppingList(
             this.props.history,

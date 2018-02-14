@@ -2,12 +2,13 @@ import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
-import SubmitButton  from '../../components/common/button';
+import SubmitButton  from '../../components/common/Button';
 import { backButton } from "../../components/common/BackButton";
 import { updateUserInfo } from "../../dispatchers";
 import { loginRequired } from "./helpers";
 
 class Edit extends React.Component {
+    /* Renders user account edit form */
 
     constructor (props) {
         super(props);
@@ -34,6 +35,10 @@ class Edit extends React.Component {
     };
 
     handleChange = (e) => {
+        /* Listen for changes in the form
+         * and update component internal
+          * state*/
+
         const key = e.target.name;
         const value = e.target.value;
         let obj = {};
@@ -48,6 +53,9 @@ class Edit extends React.Component {
     };
 
     getErrorMessages = field => {
+        /* Checks if an error exists for a specific
+         * field and displays it */
+
         if (this.props.auth.edit_errors) {
             if (this.props.auth.edit_errors.messages) {
                 if (this.props.auth.edit_errors.messages.hasOwnProperty(field)) {

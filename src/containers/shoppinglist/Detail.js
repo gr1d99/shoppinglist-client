@@ -10,9 +10,14 @@ import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
 export class ShoppingListDetailComponent extends React.Component {
+    /* Renders single shopping list detail */
 
     componentWillMount = () => {
+        /* Fetch user shopping list detail before component mounts */
+
         const { isAuthenticated } = this.props.auth;
+
+        /* Check authentication first */
         switch (isAuthenticated) {
             case true:
                 const shlId = this.props.match.params.id;
@@ -28,7 +33,10 @@ export class ShoppingListDetailComponent extends React.Component {
     };
 
     handleDelete = (e) => {
+        /* When user clicks delete button, show confirm box first */
+
         e.preventDefault();
+
         confirmAlert({
             title: 'Click confirm to delete',
             confirmLabel: 'Confirm',

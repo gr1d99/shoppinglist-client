@@ -36,28 +36,28 @@ export const LogoutUserSuccess = () => {
     return {
         type: types.LOGOUT,
     }
-}
+};
 
 export const LogoutUserError = error => {
     return {
         type: types.LOGOUT_ERROR,
         payload: error.data
     }
-}
+};
 
 export const fetchUserInfoSuccess = response => {
     return {
         type: types.USER_INFO,
         payload: response
     }
-}
+};
 
 export const fetchUserInfoError = error => {
     return {
         type: types.USER_INFO_ERROR,
         payload: error.data
     }
-}
+};
 
 export const updateUserInfoSuccess = response => {
     localStorage.clear();
@@ -65,14 +65,14 @@ export const updateUserInfoSuccess = response => {
         type: types.UPDATE_USER_INFO,
         payload: response
     }
-}
+};
 
 export const updateUserInfoError = error => {
     return {
         type: types.USER_INFO_ERROR,
         payload: error.response.data
     }
-}
+};
 
 export const deleteUserAccountSuccess = response => {
     localStorage.clear();
@@ -80,42 +80,42 @@ export const deleteUserAccountSuccess = response => {
         type: types.DELETE_USER_ACCOUNT,
         payload: response
     }
-}
+};
 
 export const deleteUserAccountError = error => {
     return {
         type: types.DELETE_USER_ACCOUNT_ERROR,
         payload: error.response.data
     }
-}
+};
 
 export const getResetTokenSuccess = response => {
     return {
         type: types.GET_RESET_TOKEN,
         payload: response
     }
-}
+};
 
 export const getResetTokenError = error => {
     return {
         type: types.GET_RESET_TOKEN_ERROR,
         payload: error.response.data
     }
-}
+};
 
 export const resetPasswordSuccess = response => {
     return {
         type: types.RESET_PASSWORD,
         payload: response
     }
-}
+};
 
 export const resetPasswordError = error => {
     return {
         type: types.RESET_PASSWORD_ERROR,
         payload: error.response.data
     }
-}
+};
 
 // SHOPPING LISTS ACTION CREATORS
 export const createShoppingListSuccess = response => {
@@ -339,12 +339,14 @@ export const clearInternalState = () => {
 };
 
 export const activateLoading = () => {
+    // Activates loading template
     return {
         type: types.IS_LOADING
     }
 };
 
 export const deactivateLoading = () => {
+    // Deactivates loading template.
     return {
         type: types.IS_NOT_LOADING
     }

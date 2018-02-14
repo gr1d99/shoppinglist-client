@@ -3,13 +3,15 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import SubmitButton  from '../../components/common/button';
+import SubmitButton  from '../../components/common/Button';
 import { LoginUser } from "../../dispatchers";
 import { conditionedComponents } from "./helpers";
 import { backButton } from "../../components/common/BackButton";
 
 
 export class Login extends React.Component {
+    /* Renders login form and submits request
+     * to backend */
 
     constructor (props) {
         super (props);
@@ -34,6 +36,9 @@ export class Login extends React.Component {
     };
 
     getErrorMessages = field => {
+        /* Checks if an error exists for a specific
+         * field and displays it */
+
         if (this.props.auth.login_errors) {
             if (this.props.auth.login_errors.messages) {
                 if (this.props.auth.login_errors.messages.hasOwnProperty(field)) {
@@ -45,10 +50,6 @@ export class Login extends React.Component {
                 }
             }
         }
-    };
-
-    goBackButton = () => {
-        return <button onClick={this.props.history.goBack} className="btn btn-default btn-xs">Go back</button>
     };
 
     render () {

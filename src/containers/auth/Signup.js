@@ -3,17 +3,19 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import SubmitButton  from '../../components/common/button';
+import SubmitButton  from '../../components/common/Button';
 import { registerUser } from "../../dispatchers";
 import { conditionedComponents } from "./helpers";
 import { backButton } from "../../components/common/BackButton";
 import Loading from '../../components/common/Loading'
 
 export class SignUp extends React.Component {
+    /* Handles user sign-up/registration functionality */
 
     constructor (props) {
         super(props);
 
+        // default internal state
         this.state = {
             username: '',
             email: '',
@@ -23,6 +25,9 @@ export class SignUp extends React.Component {
     }
 
     componentWillReceiveProps = () => {
+        /* when clean up action is fired clear the
+          * internal state values. */
+
         const { cleanup_required } = this.props.cleanup;
         switch (cleanup_required) {
             case true:
@@ -42,10 +47,15 @@ export class SignUp extends React.Component {
     };
 
     handleChange = (e) => {
+        /* Listen for changes in the form and update
+         * internal state */
+
         const key = e.target.name;
         const value = e.target.value;
         let obj = {};
+
         obj[key] = value;
+
         this.setState(obj);
     };
 
@@ -55,6 +65,9 @@ export class SignUp extends React.Component {
     };
 
     getErrorMessages = field => {
+        /* Checks if an error exists for a specific
+         * field and displays it */
+
         if (this.props.auth.signup_errors) {
             if (this.props.auth.signup_errors.messages) {
                 if (this.props.auth.signup_errors.messages.hasOwnProperty(field)) {
@@ -69,7 +82,8 @@ export class SignUp extends React.Component {
     };
 
     render () {
-        // switch ()
+        // check if loading is activated.
+
         switch (this.props.auth.isLoading) {
             case true:
                 return <Loading/>

@@ -3,12 +3,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { createShoppingList} from "../../dispatchers";
-import SubmitButton from '../../components/common/button'
+import SubmitButton from '../../components/common/Button'
 import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
 
 export class CreateShoppingList extends React.Component {
+    /* Handle creation of shopping list functionality */
+
     constructor (props) {
         super (props);
 
@@ -19,20 +21,28 @@ export class CreateShoppingList extends React.Component {
     }
 
     handleChange = (e) => {
+        /* Listen for changes in form and update state */
+
         const key = e.target.name;
         const value = e.target.value;
         let obj = {};
 
         obj[key] = value;
+
         this.setState(obj);
     };
 
     handleSubmit = (e) => {
+        /* Submit form data to backend */
+
         e.preventDefault();
         this.props.createShoppingList(this.props.history, this.state)
     };
 
     getErrorMessages = field => {
+        /* Checks if an error exists for a specific
+         * field and displays it */
+
         if (this.props.shoppingList.error_messages) {
             if (this.props.shoppingList.error_messages.messages) {
                 if (this.props.shoppingList.error_messages.messages.hasOwnProperty(field)) {

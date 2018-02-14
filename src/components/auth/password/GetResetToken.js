@@ -3,10 +3,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
 import { backButton } from "../../common/BackButton";
-import SubmitButton  from '../../common/button';
+import SubmitButton  from '../../common/Button';
 import { getPasswordResetToken } from "../../../dispatchers";
 
-class GetResetToken extends React.Component {
+class GetPasswordResetToken extends React.Component {
+    /* Handles get request to retrieve password reset
+    * token from the backend */
 
     constructor (props) {
         super(props);
@@ -17,6 +19,9 @@ class GetResetToken extends React.Component {
     }
 
     handleChange = (e) => {
+        /* Watch for changes
+        * in the form and update
+        * internal state */
         const key = e.target.name;
         const value = e.target.value;
         let obj = {};
@@ -26,11 +31,15 @@ class GetResetToken extends React.Component {
     };
 
     handleSubmit = (e) => {
+        /* submits user email to the action creator */
         e.preventDefault();
         this.props.getPasswordResetToken(this.props.history, this.state);
     };
 
     getErrorMessages = field => {
+        /* A method to get error message for specific field.
+        * It takes in the `field` name and checks if their
+        * is an error associated with the specific field */
         if (this.props.auth.reset_password_errors) {
             if (this.props.auth.reset_password_errors.messages) {
                 if (this.props.auth.reset_password_errors.messages.hasOwnProperty(field)) {
@@ -77,6 +86,7 @@ class GetResetToken extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
+    // bind `getPasswordResetToken` function to props
     return {
         getPasswordResetToken: bindActionCreators(getPasswordResetToken, dispatch)
     }
@@ -86,4 +96,4 @@ const mapStateToProps = ({auth}) => {
     return {auth}
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(backButton(GetResetToken));
+export default connect(mapStateToProps, mapDispatchToProps)(backButton(GetPasswordResetToken));

@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 
 import { updateShoppingListItem } from "../../dispatchers/index";
-import SubmitButton  from '../../components/common/button';
+import SubmitButton  from '../../components/common/Button';
 import { loginRequired } from "../auth/helpers/index";
 import { backButton } from "../../components/common/BackButton";
 
 export class EditShoppingListItem extends React.Component {
+    /* Handle editing of shopping list item functionality */
+
     constructor(props) {
         super(props);
 
@@ -20,14 +22,19 @@ export class EditShoppingListItem extends React.Component {
     }
 
     componentWillMount = () => {
+        /* fetch shopping item details before components mount */
+
         const { isAuthenticated } = this.props.auth;
+
         switch (isAuthenticated) {
+            /* Check if user is authenticated */
             case true:
                 if (this.props.shoppingItem.shlItemDetail) {
                     const { name, price, quantity_description, bought } = this.props.shoppingItem.shlItemDetail;
                     this.setState({name, price, quantity_description, bought })}
                 return;
 
+            // REDIRECT USERS TO LOGIN IF THEY ARE NOT AUTHENTICATED.
             case false:
                 return this.props.history.push('/login');
 
@@ -38,6 +45,8 @@ export class EditShoppingListItem extends React.Component {
 
 
     handleChange = e => {
+        /* Listen for changes in form and update state */
+
         const key = e.target.name;
         let value = e.target.value;
         key === 'bought' && (value = e.target.checked);
@@ -49,9 +58,13 @@ export class EditShoppingListItem extends React.Component {
     };
 
     handleSubmit = e => {
+        /* Submit proposed changes */
+
         const shlId = this.props.shoppingItem.shlId;
         const itemId = this.props.match.params.id;
+
         e.preventDefault();
+
          this.props.updateShoppingListItem(
             this.props.history,
             shlId,
@@ -59,6 +72,9 @@ export class EditShoppingListItem extends React.Component {
             this.state)};
 
     getErrorMessages = field => {
+        /* Checks if an error exists for a specific
+         * field and displays it */
+
         if (this.props.shoppingItem.error_messages) {
             if (this.props.shoppingItem.error_messages.messages) {
                 if (this.props.shoppingItem.error_messages.messages.hasOwnProperty(field)) {

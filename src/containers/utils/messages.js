@@ -9,7 +9,11 @@ const TIMEOUT = 5000;
 
 
 export class AlertMessages extends React.Component {
+    /* Render alert messages of different categories */
+
     displayAlerts = () => {
+        /* Check message category and return appropriate div */
+
         switch (this.props.alerts.category) {
             case SUCCESS_ALERT:
                 setTimeout(() => {

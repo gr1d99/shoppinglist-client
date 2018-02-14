@@ -6,9 +6,15 @@ const initialState = {
     isAuthenticated: _auth,
     userDetail: null,
     password_reset_token: '',
-    isLoading: false
-}
+    isLoading: false,
+    login_errors: '',
+    signup_errors: '',
+    login_error: '',
+    edit_errors: '',
+    reset_password_errors: ''
+};
 
+// Authentication reducer
 export const Authenticate = (state=initialState, action) => {
     switch (action.type) {
         case types.IS_LOADING:
@@ -24,48 +30,67 @@ export const Authenticate = (state=initialState, action) => {
             };
 
         case types.LOGIN:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 isAuthenticated: _auth
-            });
+            };
 
         case types.LOGIN_ERROR:
-            return {login_errors: action.payload};
+            return {
+                ...state,
+                login_errors: action.payload
+            };
 
         case types.SIGNUP:
             return state;
 
         case types.SIGNUP_ERROR:
-            return {signup_errors: action.payload};
+            return {
+                ...state,
+                signup_errors: action.payload
+            };
 
         case types.LOGOUT:
             return state;
 
         case types.LOGOUT_ERROR:
-            return {login_error: action.payload};
+            return {
+                ...state,
+                login_error:action.payload
+            };
 
         case types.USER_INFO:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 userDetail: action.payload.data.data
-            });
+            };
 
         case types.USER_INFO_ERROR:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 edit_errors: action.payload
-            });
+            };
 
         case types.GET_RESET_TOKEN:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 password_reset_token: action.payload.data.data.password_reset_token
-            });
+            };
 
         case types.GET_RESET_TOKEN_ERROR:
-            return {reset_password_errors: action.payload};
+            return {
+                ...state,
+                reset_password_errors: action.payload
+            };
 
         case types.RESET_PASSWORD:
             return state;
 
         case types.RESET_PASSWORD_ERROR:
-            return {reset_password_errors: action.payload};
+            return {
+                ...state,
+                reset_password_errors: action.payload
+            };
 
         default:
             return state

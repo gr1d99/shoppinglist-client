@@ -1,8 +1,13 @@
 import React from 'react';
 
 export const backButton = WrappedClass => {
+    /* Helper component to always render a back button */
+
     return  class ShowBackButton extends React.Component {
         goBack = e => {
+            /* Handle click on the back button and redirect
+             * to appropriate page */
+
             switch (this.props.match.path) {
                 case "/shoppinglists/:id":
                 case "/shoppinglists/search":
@@ -19,11 +24,17 @@ export const backButton = WrappedClass => {
                     return this.props.history.push('/')
 
             }
-        }
+        };
+
         render() {
             return (
                 <div className="col-md-12">
-                    <button className="btn btn-default btn-xs pull-left" onClick={this.goBack}><span className="glyphicon glyphicon-arrow-left"></span> Go back</button>
+                    <button
+                        className="btn btn-default btn-xs pull-left"
+                        onClick={this.goBack}>
+                        <span className="glyphicon glyphicon-arrow-left"></span>
+                        Go back
+                    </button>
                     <WrappedClass {...this.props}/>
                 </div>
             )

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Button from '../../../components/common/button';
+import Button from '../../../components/common/Button';
 
 
 describe('Button component', () => {
