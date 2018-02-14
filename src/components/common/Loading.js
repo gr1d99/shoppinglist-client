@@ -3,10 +3,11 @@ import React from 'react';
 const Loading = () => {
     /* Helper component to indicate
      * request is running */
+
     return (
-        <div className="loading">
-            <p>Loading...</p>
-        </div>
+        <label className="btn btn-sm btn-info">
+            <span className="glyphicon glyphicon-refresh glyphicon-refresh-animate">
+            </span> Loading...</label>
     )
 };
 

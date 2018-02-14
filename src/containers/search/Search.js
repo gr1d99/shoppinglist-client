@@ -7,7 +7,8 @@ import Truncate from 'react-truncate';
 import { loginRequired } from "../auth/helpers";
 import { searchShoppingLists } from "../../dispatchers";
 import { backButton } from "../../components/common/BackButton";
-
+import Loading from '../../components/common/Loading'
+import * as actions from "../../actions";
 
 export class SearchShoppingLists extends React.Component {
     /* Handles shopping list search functionality */
@@ -33,7 +34,8 @@ export class SearchShoppingLists extends React.Component {
 
     handleSearch = (e) => {
         e.preventDefault();
-        this.props.searchShoppingLists(this.props.history, this.state.term)
+        this.props.searchShoppingLists(this.props.history, this.state.term);
+        this.props.dispatch(actions.activateLoading()) // show loading button
     };
 
     handleClick = url => e => {
@@ -164,11 +166,13 @@ export class SearchShoppingLists extends React.Component {
                                    placeholder="Search"/>
                         </div>
 
-                        <button
-                            type="submit"
-                            className="btn btn-default">
-                            Search
-                        </button>
+                        {this.props.loader.isLoading ? <Loading/> :
+                            <button
+                                type="submit"
+                                className="btn btn-default">
+                                Search
+                            </button>
+                        }
                     </form>
 
                 </div>
@@ -190,13 +194,14 @@ export class SearchShoppingLists extends React.Component {
     }
 }
 
-const mapStateToProps = ({auth, search}) => {
-    return {auth, search}
+const mapStateToProps = ({auth, search, loader}) => {
+    return {auth, search, loader}
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        searchShoppingLists: bindActionCreators(searchShoppingLists, dispatch)
+        searchShoppingLists: bindActionCreators(searchShoppingLists, dispatch),
+        dispatch
     }
 };
 

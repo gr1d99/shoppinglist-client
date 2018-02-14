@@ -5,6 +5,8 @@ import { bindActionCreators } from "redux";
 import { updateShoppingList, getUserShoppingListDetail } from "../../dispatchers/index";
 import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
+import Loading from '../../components/common/Loading'
+import * as actions from "../../actions";
 
 class EditShoppingList extends React.Component {
     /* Render shopping list edit form */
@@ -67,7 +69,8 @@ class EditShoppingList extends React.Component {
             this.props.history,
             shlId,
             this.state
-        )
+        );
+        this.props.dispatch(actions.activateLoading())
     };
 
     render() {
@@ -101,7 +104,10 @@ class EditShoppingList extends React.Component {
                             </textarea>
                         </div>
 
-                        <button type="submit" className="btn btn-info">Update</button>
+                        {this.props.loader.isLoading ? <Loading/> :
+                            <button type="submit" className="btn btn-info">Update</button>
+                        }
+
                     </form>
                 </div>
             </div>
@@ -113,11 +119,12 @@ const mapDispatchToProps = dispatch => {
     return {
         updateShoppingList: bindActionCreators(updateShoppingList, dispatch),
         getUserShoppingListDetail: bindActionCreators(getUserShoppingListDetail, dispatch),
+        dispatch
     }
 }
 
-const mapStateToProps = ({shoppingList, auth}) => {
-    return {shoppingList, auth}
+const mapStateToProps = ({shoppingList, auth, loader}) => {
+    return {shoppingList, auth, loader}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(loginRequired(backButton(EditShoppingList)))
