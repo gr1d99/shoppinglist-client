@@ -28,7 +28,8 @@ const setup = () => {
     };
 
     const props = {
-        search: {results: results}
+        search: {results: results},
+        loader: {}
     };
     let enzymeWrapper;
     enzymeWrapper = mount(

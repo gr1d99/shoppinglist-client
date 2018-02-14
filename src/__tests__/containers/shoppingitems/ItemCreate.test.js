@@ -11,7 +11,8 @@ const setup = () => {
     const props = {
         shoppingItem: shoppingItem,
         auth: {isAuthenticated: true},
-        createShoppingList: jest.fn()
+        createShoppingList: jest.fn(),
+        loader: {}
     };
 
     let enzymeWrapper;

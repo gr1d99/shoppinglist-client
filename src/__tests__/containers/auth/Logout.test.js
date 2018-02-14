@@ -13,7 +13,10 @@ Enzyme.configure({adapter: new Adapter()});
 const setup = (connected=false) => {
     const props = {
         auth: {},
-        LogoutUser: jest.fn()};
+        LogoutUser: jest.fn(),
+        loader: {},
+        dispatch: jest.fn()
+    };
     let enzymeWrapper, mockStore, store;
     const middlewares = [];
     let initialState = {

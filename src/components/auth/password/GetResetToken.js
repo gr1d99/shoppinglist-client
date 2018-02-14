@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { backButton } from "../../common/BackButton";
 import SubmitButton  from '../../common/Button';
 import { getPasswordResetToken } from "../../../dispatchers";
+import Loading from '../../../components/common/Loading'
+import * as actions from "../../../actions";
 
 class GetPasswordResetToken extends React.Component {
     /* Handles get request to retrieve password reset
@@ -34,6 +36,8 @@ class GetPasswordResetToken extends React.Component {
         /* submits user email to the action creator */
         e.preventDefault();
         this.props.getPasswordResetToken(this.props.history, this.state);
+        this.props.dispatch(actions.activateLoading()) // activate loading immediately.
+
     };
 
     getErrorMessages = field => {
@@ -72,10 +76,12 @@ class GetPasswordResetToken extends React.Component {
                             {this.getErrorMessages('email')}
                         </div>
 
-                        <SubmitButton
-                            type='submit'
-                            className='btn btn-success'
-                            value='Proceed'/>
+                        {this.props.loader.isLoading ? <Loading/> :
+                            <SubmitButton
+                                type='submit'
+                                className='btn btn-success'
+                                value='Proceed'/>
+                        }
                     </form>
 
                 </div>
@@ -88,12 +94,13 @@ class GetPasswordResetToken extends React.Component {
 const mapDispatchToProps = dispatch => {
     // bind `getPasswordResetToken` function to props
     return {
-        getPasswordResetToken: bindActionCreators(getPasswordResetToken, dispatch)
+        getPasswordResetToken: bindActionCreators(getPasswordResetToken, dispatch),
+        dispatch
     }
 };
 
-const mapStateToProps = ({auth}) => {
-    return {auth}
+const mapStateToProps = ({auth, loader}) => {
+    return {auth, loader}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(backButton(GetPasswordResetToken));

@@ -8,7 +8,10 @@ Enzyme.configure({adapter: new Adapter()});
 const setup = () => {
     const props = {
         auth: {},
-        loginUser: jest.fn()};
+        loginUser: jest.fn(),
+        loader: {},
+        dispatch: jest.fn()
+    };
     const enzymeWrapper = shallow(<Login {...props}/>);
 
     return {

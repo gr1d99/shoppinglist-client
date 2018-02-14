@@ -33,11 +33,9 @@ export const registerUser = (history, data) => {
             })
             .then(response => {
                 /* Dispatch appropriate actions after successful response */
-                dispatch(actions.activateLoading()); // activate loading immediately.
                 dispatch(actions.RegisterUserSuccess(response));
                 dispatch(actions.successfulOperation(msgs.ACCOUNT_CREATED));
                 dispatch(actions.clearInternalState());
-                dispatch(actions.deactivateLoading()); // deactivate loading
 
                 // redirect user to login
                 history.push('/login');
@@ -74,10 +72,12 @@ export const LoginUser = (history, data) => {
                 }
             })
             .then(response => {
+                dispatch(actions.activateLoading()); // activate loading immediately.
                 dispatch(actions.LoginUserSuccess(response));
                 dispatch(actions.successfulOperation(msgs.LOGGED_IN));
                 history.push("/");
                 window.location.reload()
+                dispatch(actions.deactivateLoading()); // deactivate loading
             })
             .catch(error => {
                 // handle errors in request
@@ -86,6 +86,8 @@ export const LoginUser = (history, data) => {
                 dispatch(actions.LoginUserError(error));
                 dispatch(actions.failedOperation(error));
                 history.push("/login")
+                dispatch(actions.deactivateLoading()); // deactivate loading
+
             })
     }
 };
@@ -109,6 +111,7 @@ export const LogoutUser = (history) => {
                 dispatch(actions.LogoutUserSuccess());
                 dispatch(actions.successfulOperation(msgs.LOGGED_OUT));
                 history.push('/');
+                dispatch(actions.deactivateLoading()); // deactivate loading
                 window.location.reload()
             })
             .catch(error => {
@@ -117,8 +120,10 @@ export const LogoutUser = (history) => {
                 history.push('/');
 
                 // dispatch error action creators
-                dispatch(actions.LogoutUserError(error))
-                dispatch(actions.failedOperation(error))
+                dispatch(actions.LogoutUserError(error));
+                dispatch(actions.failedOperation(error));
+                dispatch(actions.deactivateLoading()); // deactivate loading
+
             })
     }
 };
@@ -174,7 +179,8 @@ export const updateUserInfo = (history, data) => {
             })
             .then(response => {
                 dispatch(actions.updateUserInfoSuccess(response));
-                dispatch(actions.successfulOperation(msgs.ACCOUNT_UPDATED))
+                dispatch(actions.successfulOperation(msgs.ACCOUNT_UPDATED));
+                actions.deactivateLoading();
                 history.push('/login');
                 setTimeout(() => {
                     window.location.reload()
@@ -188,6 +194,7 @@ export const updateUserInfo = (history, data) => {
                 // dispatch error action creators
                 dispatch(actions.updateUserInfoError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
+                dispatch(actions.deactivateLoading())
             })
     }
 };
@@ -210,7 +217,8 @@ export const getPasswordResetToken = (history, data) => {
             })
             .then(response => {
                 dispatch(actions.getResetTokenSuccess(response));
-                dispatch(actions.successfulOperation(response.data.message))
+                dispatch(actions.successfulOperation(response.data.message));
+                dispatch(actions.deactivateLoading()); // deactivate loading
                 history.push('/forgot-password/reset-token/show');
             })
             .catch(error => {
@@ -221,6 +229,8 @@ export const getPasswordResetToken = (history, data) => {
                 // dispatch error action creators
                 dispatch(actions.getResetTokenError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
+                dispatch(actions.deactivateLoading()); // deactivate loading
+
             })
     }
 };
@@ -248,6 +258,7 @@ export const resetUserPassword = (history, data) => {
             .then(response => {
                 dispatch(actions.resetPasswordSuccess(response));
                 dispatch(actions.successfulOperation(response.data.message));
+                dispatch(actions.deactivateLoading()); // deactivate loading
                 history.push('/');
             })
             .catch(error => {
@@ -256,6 +267,7 @@ export const resetUserPassword = (history, data) => {
                 // dispatch error action creators
                 dispatch(actions.resetPasswordError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
+                dispatch(actions.deactivateLoading()); // deactivate loading
 
                 // redirect user
                 history.push('/forgot-password/reset');
@@ -327,6 +339,7 @@ export const createShoppingList = (history, data) => {
             .then(response => {
                 dispatch(actions.createShoppingListSuccess(response));
                 dispatch(actions.successfulOperation(msgs.SHOPPING_LIST_CREATED));
+                dispatch(actions.deactivateLoading()); // deactivate loading
                 history.push(`/shoppinglists`) // redirect user
             })
             .catch(error => {
@@ -335,6 +348,7 @@ export const createShoppingList = (history, data) => {
                 // dispatch error action creators
                 dispatch(actions.createShoppingListError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
+                dispatch(actions.deactivateLoading()); // deactivate loading
 
                 history.push(`/shoppinglists/create`) // redirect user
             })
@@ -421,7 +435,7 @@ export const updateShoppingList = (history, id, new_data) => {
                     history.push(`/shoppinglists/${id}`);
                     dispatch(actions.updateShoppingListSuccess(response));
                     dispatch(actions.successfulOperation(msgs.SHOPPING_LIST_UPDATED))
-
+                    dispatch(actions.deactivateLoading()); // deactivate loading
                 })
                 .catch(error => {
                     // handle errors in request
@@ -431,6 +445,7 @@ export const updateShoppingList = (history, id, new_data) => {
                     // dispatch error action creators
                     dispatch(actions.updateShoppingListError(error));
                     error.response.data.message && dispatch(actions.failedOperation(error));
+                    dispatch(actions.deactivateLoading()); // deactivate loading
                 });
         }
 };
@@ -497,6 +512,7 @@ export const createShoppingItem = (history, id, data) => {
                 history.push(`/shoppinglists/${id}`);
                 dispatch(actions.createShoppingItemSuccess(response));
                 dispatch(actions.successfulOperation(msgs.SHOPPING_LIST_CREATED))
+                dispatch(actions.deactivateLoading()); // deactivate loading
             })
             .catch(error => {
                 // handle errors in request
@@ -506,6 +522,7 @@ export const createShoppingItem = (history, id, data) => {
                 // dispatch error action creators
                 dispatch(actions.createShoppingItemError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
+                dispatch(actions.deactivateLoading()); // deactivate loading
             })
     }
 };
@@ -605,7 +622,7 @@ export const updateShoppingListItem = (history, shlId, itemId, new_data) => {
                 // dispatch success action creators
                 dispatch(actions.successfulOperation(msgs.SHOPPING_ITEM_UPDATED));
                 dispatch(actions.updateShoppingItemDetailSuccess(response));
-
+                dispatch(actions.deactivateLoading()); // deactivate loading
             })
             .catch(error => {
                 // handle errors in request
@@ -615,6 +632,7 @@ export const updateShoppingListItem = (history, shlId, itemId, new_data) => {
                 // dispatch error action creators
                 dispatch(actions.updateShoppingItemsDetailError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
+                dispatch(actions.deactivateLoading()); // deactivate loading
             });
     }
 };
@@ -673,6 +691,7 @@ export const searchShoppingLists = (history, term, url=null) => {
                 // dispatch success action creators
                 dispatch(actions.searchShoppingListsSuccess(response));
                 response.data.message && dispatch(actions.successfulOperation(response.data.message));
+                dispatch(actions.deactivateLoading()); // deactivate loading
 
                 history.push('/shoppinglists/search') // redirect user
             })
@@ -684,6 +703,7 @@ export const searchShoppingLists = (history, term, url=null) => {
                 // dispatch error action creators
                 dispatch(actions.searchShoppingListsError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
+                dispatch(actions.deactivateLoading()); // deactivate loading
             })
     }
 };

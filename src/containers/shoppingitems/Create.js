@@ -6,6 +6,8 @@ import { createShoppingItem } from "../../dispatchers/index";
 import SubmitButton  from '../../components/common/Button';
 import { loginRequired } from "../auth/helpers/index";
 import { backButton } from "../../components/common/BackButton";
+import Loading from '../../components/common/Loading'
+import * as actions from "../../actions";
 
 export class CreateShoppingItem extends React.Component {
     /* Handles creation of shopping item */
@@ -44,6 +46,7 @@ export class CreateShoppingItem extends React.Component {
             this.props.history,
             shlId,
             this.state);
+        this.props.dispatch(actions.activateLoading())
     };
 
     getErrorMessages = field => {
@@ -109,10 +112,12 @@ export class CreateShoppingItem extends React.Component {
                                 {this.getErrorMessages('quantity')}
                             </div>
 
-                            <SubmitButton
-                                type='submit'
-                                className='btn btn-success'
-                                value='Submit' />
+                            {this.props.loader.isLoading ? <Loading/> :
+                                <SubmitButton
+                                    type='submit'
+                                    className='btn btn-success'
+                                    value='Submit'/>
+                            }
 
                         </form>
 
@@ -124,13 +129,14 @@ export class CreateShoppingItem extends React.Component {
     }
 }
 
-const mapStateToProps = ({shoppingItem, auth}) => {
-    return {shoppingItem, auth}
+const mapStateToProps = ({shoppingItem, auth, loader}) => {
+    return {shoppingItem, auth, loader}
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        createShoppingList: bindActionCreators(createShoppingItem, dispatch)
+        createShoppingList: bindActionCreators(createShoppingItem, dispatch),
+        dispatch
     }
 };
 

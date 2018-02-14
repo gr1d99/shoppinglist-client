@@ -6,6 +6,8 @@ import SubmitButton  from '../../components/common/Button';
 import { backButton } from "../../components/common/BackButton";
 import { updateUserInfo } from "../../dispatchers";
 import { loginRequired } from "./helpers";
+import Loading from '../../components/common/Loading'
+import * as actions from "../../actions";
 
 class Edit extends React.Component {
     /* Renders user account edit form */
@@ -50,6 +52,7 @@ class Edit extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.updateUserInfo(this.props.history, this.state);
+        this.props.dispatch(actions.activateLoading())
     };
 
     getErrorMessages = field => {
@@ -88,10 +91,12 @@ class Edit extends React.Component {
                             {this.getErrorMessages('username')}
                         </div>
 
-                        <SubmitButton
-                            type='submit'
-                            className='btn btn-success'
-                            value='Update Account'/>
+                        {this.props.loader.isLoading ? <Loading/> :
+                            <SubmitButton
+                                type='submit'
+                                className='btn btn-success'
+                                value='Update Account'/>
+                        }
                     </form>
 
                 </div>
@@ -103,12 +108,13 @@ class Edit extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateUserInfo: bindActionCreators(updateUserInfo, dispatch)
+        updateUserInfo: bindActionCreators(updateUserInfo, dispatch),
+        dispatch
     }
 };
 
-const mapStateToProps = ({auth, cleanup}) => {
-    return {auth, cleanup}
+const mapStateToProps = ({auth, cleanup, loader}) => {
+    return {auth, cleanup, loader}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(loginRequired(backButton(Edit)));

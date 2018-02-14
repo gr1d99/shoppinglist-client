@@ -6,6 +6,8 @@ import { updateShoppingListItem } from "../../dispatchers/index";
 import SubmitButton  from '../../components/common/Button';
 import { loginRequired } from "../auth/helpers/index";
 import { backButton } from "../../components/common/BackButton";
+import Loading from '../../components/common/Loading'
+import * as actions from "../../actions";
 
 export class EditShoppingListItem extends React.Component {
     /* Handle editing of shopping list item functionality */
@@ -65,11 +67,13 @@ export class EditShoppingListItem extends React.Component {
 
         e.preventDefault();
 
-         this.props.updateShoppingListItem(
+        this.props.updateShoppingListItem(
             this.props.history,
             shlId,
             itemId,
-            this.state)};
+            this.state);
+        this.props.dispatch(actions.activateLoading()) // activate loading
+    };
 
     getErrorMessages = field => {
         /* Checks if an error exists for a specific
@@ -143,10 +147,12 @@ export class EditShoppingListItem extends React.Component {
                             {this.getErrorMessages('bought')}
                         </div>
 
-                        <SubmitButton
-                            type='submit'
-                            className='btn btn-success'
-                            value='Submit' />
+                        {this.props.loader.isLoading ? <Loading/> :
+                            <SubmitButton
+                                type='submit'
+                                className='btn btn-success'
+                                value='Submit'/>
+                        }
 
                     </form>
 
@@ -159,11 +165,12 @@ export class EditShoppingListItem extends React.Component {
 const mapDispatchToProps = dispatch => {
     return {
         updateShoppingListItem: bindActionCreators(updateShoppingListItem, dispatch),
+        dispatch
     }
 };
 
-const mapStateToProps = ({shoppingItem, auth}) => {
-    return {shoppingItem, auth}
+const mapStateToProps = ({shoppingItem, auth, loader}) => {
+    return {shoppingItem, auth, loader}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(loginRequired(backButton(EditShoppingListItem)))
