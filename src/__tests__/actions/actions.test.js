@@ -152,4 +152,20 @@ describe('action creators', () => {
 
         expect(actions.itemToEditId(ID)).toEqual(expectedAction)
     });
+
+    it('should create an action to activate loader', () => {
+        const expectedAction = {
+            type: types.IS_LOADING,
+        };
+
+        expect(actions.activateLoading()).toEqual(expectedAction)
+    });
+
+    it('should create an action to deactivate loader', () => {
+        const expectedAction = {
+            type: types.IS_NOT_LOADING,
+        };
+
+        expect(actions.deactivateLoading()).toEqual(expectedAction)
+    });
 });
