@@ -10,11 +10,17 @@ import { loginRequired } from "../auth/helpers";
 import { backButton } from "../../components/common/BackButton";
 
 export class List extends React.Component {
+    /* Render all shopping lists for a user */
 
     componentWillMount = () => {
+        /* Fetch user shopping lists before component mounts */
+
         const { isAuthenticated } = this.props.auth;
+
+        /* Check if user is authenticated, if not redirect to login page */
         switch (isAuthenticated) {
             case true:
+                // fetch user shopping lists
                 return this.props.getUserShoppingLists(this.props.history);
 
             case false:
@@ -26,6 +32,8 @@ export class List extends React.Component {
     };
 
     handleClick = url => e => {
+        /* Redirect user to next or previous page depending on the provided url */
+
         e.preventDefault();
         this.props.getUserShoppingLists(
             this.props.history,
@@ -33,6 +41,7 @@ export class List extends React.Component {
     };
 
     pageMetaData = (location) => {
+        /* Render response metadata */
         const { total_items,
             current_page,
             next_page,
@@ -40,6 +49,7 @@ export class List extends React.Component {
             next_page_url,
             previous_page_url } = this.props.shoppingList;
 
+        /* use switch statement to render content on different sections of the page */
         switch (location) {
             case 'up':
                 return (
@@ -54,9 +64,22 @@ export class List extends React.Component {
                         <div>
                             <nav aria-label="">
                                 <ul className="pager">
-                                    <li className="next pull-left"><Link to='/' onClick={this.handleClick(previous_page_url)} className="pull-left"><span aria-hidden="true">&larr;</span> Previous </Link></li>
+
+                                    <li className="next pull-left">
+                                        <Link to='/'
+                                              onClick={this.handleClick(previous_page_url)}
+                                              className="pull-left"><span aria-hidden="true">&larr;</span> Previous
+                                        </Link>
+                                    </li>
+
                                     <span className="text-center page-info">Page {current_page} of {total_pages}</span>
-                                    <li className="previous pull-right"><Link to='/' onClick={this.handleClick(next_page_url)}> <span aria-hidden="true">&rarr;</span> Next</Link></li>
+
+                                    <li className="previous pull-right">
+                                        <Link to='/'
+                                              onClick={this.handleClick(next_page_url)}> <span aria-hidden="true">&rarr;</span> Next
+                                        </Link>
+                                    </li>
+
                                 </ul>
                             </nav>
                         </div>
@@ -91,7 +114,9 @@ export class List extends React.Component {
                                     </h6>
                                 </div>
                                 <div className="panel-body shoppinglist-box">
-                                    <p className="text-justified"><Truncate lines={2} ellipsis={<span>...</span>}>{shl.description}</Truncate></p>
+                                    <p className="text-justified">
+                                        <Truncate lines={2} ellipsis={<span>...</span>}>{shl.description}</Truncate>
+                                    </p>
                                 </div>
                                 <div className="panel-footer"></div>
                             </div>

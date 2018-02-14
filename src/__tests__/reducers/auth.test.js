@@ -1,112 +1,91 @@
 import * as types  from "../../actions/ActionTypes";
-import { Authenticate, _auth } from "../../reducers/auth";
+import { Authenticate, _auth, initialState } from "../../reducers/auth";
 
 
 describe('Authentication reducer', () => {
     it('returns default state', () => {
         expect(
             Authenticate(undefined, {type: 'unknown'})
-        ).toEqual(
-            {isAuthenticated: _auth, isLoading:false, userDetail: null, password_reset_token: ''}
-        )
-    })
+        ).toEqual(initialState)
+    });
 
     it('handles LOGIN', () => {
         expect(
             Authenticate(undefined, {type: types.LOGIN})
-        ).toEqual(
-            {isAuthenticated: _auth, isLoading:false, userDetail: null, password_reset_token: ''}
-        )
-    })
+        ).toEqual(initialState)
+    });
 
     it('handles LOGOUT', () => {
         expect(
             Authenticate(undefined, {type: types.LOGOUT})
-        ).toEqual(
-            {isAuthenticated: _auth, isLoading: false, userDetail: null, password_reset_token: ''}
-        )
-    })
+        ).toEqual(initialState)
+    });
 
     it('handles SIGNUP', () => {
         expect(
             Authenticate(undefined, {type: types.SIGNUP})
-        ).toEqual(
-            {isAuthenticated: _auth, isLoading: false, userDetail: null, password_reset_token: ''}
-        )
-    })
+        ).toEqual(initialState)
+    });
 
     it('handles SIGNUP_ERRORS', () => {
-        expect(
-            Authenticate(undefined, {type: types.SIGNUP_ERROR, payload: 'invalid details'})
-        ).toEqual(
-            {signup_errors: 'invalid details'}
-        )
-    })
+        const signup_errors = 'invalid details';
+        const expectedState = {...initialState, signup_errors: signup_errors};
 
-    it('handles SIGNUP_ERRORS', () => {
         expect(
-            Authenticate(undefined, {type: types.SIGNUP_ERROR, payload: 'invalid details'})
-        ).toEqual(
-            {signup_errors: 'invalid details'}
-        )
-    })
+            Authenticate(undefined, {type: types.SIGNUP_ERROR, payload: signup_errors})
+        ).toEqual(expectedState)
+    });
 
     it('handles LOGOUT_ERRORS', () => {
+        const login_error = 'invalid details';
+        const expectedState = {...initialState, login_error: login_error};
+
         expect(
-            Authenticate(undefined, {type: types.LOGOUT_ERROR, payload: 'invalid details'})
-        ).toEqual(
-            {login_error: 'invalid details'}
-        )
-    })
+            Authenticate(undefined, {type: types.LOGOUT_ERROR, payload:  login_error})).toEqual(expectedState)
+    });
 
     it('handles USER_INFO', () => {
+        const userDetail = 'gideon';
+        const payload = {data: {data: userDetail}};
+        const expectedState = {...initialState, userDetail: userDetail}
+
         expect(
-            Authenticate(undefined, {type: types.USER_INFO, payload: {data: {
-                data: 'gideon'
-                    }}})
-        ).toEqual(
-            {isAuthenticated: _auth, isLoading: false, userDetail: 'gideon', password_reset_token: ''}
-        )
-    })
+            Authenticate(undefined, {type: types.USER_INFO, payload: payload})
+        ).toEqual(expectedState)
+    });
 
     it('handles USER_INFO_ERROR', () => {
+        const edit_error = 'invalid details';
+        const expectedState = {...initialState, edit_errors: 'invalid details'};
         expect(
-            Authenticate(undefined, {type: types.USER_INFO_ERROR, payload: 'invalid details'})
-        ).toEqual(
-            {isAuthenticated: _auth, isLoading: false, userDetail: null, password_reset_token: '', edit_errors: 'invalid details'}
-        )
-    })
+            Authenticate(undefined, {type: types.USER_INFO_ERROR, payload: edit_error})
+        ).toEqual(expectedState)
+    });
 
     it('handles GET_RESET_TOKEN', () => {
-        expect(
-            Authenticate(undefined, {type: types.GET_RESET_TOKEN, payload: {data: {data: {password_reset_token: '123'}}}})
-        ).toEqual(
-            {isAuthenticated: _auth, userDetail: null, isLoading:false, password_reset_token: '123'}
-        )
+        const payload = {data: {data: {password_reset_token: '123'}}};
+        const expectedState = {...initialState, password_reset_token: '123'};
+        expect(Authenticate(undefined, {type: types.GET_RESET_TOKEN, payload: payload})).toEqual(expectedState)
     })
 
     it('handles GET_RESET_TOKEN_ERROR', () => {
+        const error = 'invalid request';
+        const expectedState = {...initialState, reset_password_errors: error};
         expect(
             Authenticate(undefined, {type: types.GET_RESET_TOKEN_ERROR, payload: 'invalid request'})
-        ).toEqual(
-            {reset_password_errors: 'invalid request'}
-        )
+        ).toEqual(expectedState)
     })
 
     it('handles RESET_PASSWORD', () => {
         expect(
             Authenticate(undefined, {type: types.RESET_PASSWORD})
-        ).toEqual(
-            {isAuthenticated: _auth, isLoading: false, userDetail: null, password_reset_token: ''}
-        )
+        ).toEqual(initialState)
     })
 
     it('handles RESET_PASSWORD_ERROR', () => {
-        expect(
-            Authenticate(undefined, {type: types.RESET_PASSWORD_ERROR, payload: 'invalid credentials'})
-        ).toEqual(
-            {reset_password_errors: 'invalid credentials'}
-        )
+        const error = 'invalid credentials';
+        const expectedState = { ...initialState, reset_password_errors: error};
+        expect(Authenticate(undefined, {type: types.RESET_PASSWORD_ERROR, payload: 'invalid credentials'})).toEqual(expectedState)
     })
 
 })

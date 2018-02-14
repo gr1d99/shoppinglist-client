@@ -11,13 +11,19 @@ import { loginRequired } from "../auth/helpers/index";
 import { backButton } from "../../components/common/BackButton";
 
 export class List extends React.Component {
+    /* Handles shopping items retrieval */
 
     componentDidMount = () => {
+        /* When component mounts, retrieve all shopping items */
+
         const { isAuthenticated } = this.props.auth;
+
+        // User should be authenticated else redirect the user back to login
         switch (isAuthenticated) {
             case true:
                 const shlId = this.props.match.params.id;
                 this.props.fetchShoppingItems(this.props.history, shlId);
+
                 return;
 
             case false:
@@ -29,19 +35,12 @@ export class List extends React.Component {
     };
 
     handleEditClick = (shlId, itemId) => e => {
+        /* Take user to item edit page and also fetch shopping item details */
+
         e.preventDefault();
+
         this.props.getUserShoppingListItemDetail(this.props.history, shlId, itemId);
         this.props.itemToEditId(shlId)
-
-    };
-
-    handleClick = url => e => {
-        const shlId = this.props.match.params.id;
-        e.preventDefault();
-        this.props.fetchShoppingItems(
-            this.props.history,
-            shlId,
-            url)
     };
 
     handleDelete = (shlId, itemid) => e => {
@@ -57,46 +56,9 @@ export class List extends React.Component {
         return <span className={status ? 'glyphicon glyphicon-ok-circle': 'glyphicon glyphicon-remove-sign'}></span>
     };
 
-    pageMetaData = (location) => {
-        if (this.props.shoppingItem.items) {
-            const {
-                total_items,
-                current_page,
-                next_page,
-                total_pages,
-                next_page_url,
-                previous_page_url
-            } = this.props.shoppingItem.items;
-
-            switch (location) {
-                case 'up':
-                    return <span>({total_items > 0 ? total_items : 0})</span>;
-
-                case 'down':
-                    if (next_page > 0 || current_page > 1) {
-                        return (
-                            <div>
-                                <button onClick={this.handleClick(next_page_url)} className="pull-right">Next
-                                    Page {next_page}</button>
-                                <span className="text-center page-info">Page {current_page} of {total_pages}</span>
-                                <button onClick={this.handleClick(previous_page_url)} className="pull-left">Previous
-                                    Page
-                                </button>
-                            </div>
-                        );
-                    } else {
-                        return ''
-                    }
-
-                default:
-                    return ''
-            }
-        } else {
-            return <div><h1>Loading..</h1></div>
-        }
-    };
-
     renderShoppingItems = () => {
+        /* Render all shopping items in a table */
+
         const shlId = this.props.match.params.id;
 
         if (this.props.shoppingItem.items) {

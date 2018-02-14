@@ -3,12 +3,13 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
 import { backButton } from "../../../components/common/BackButton";
-import SubmitButton  from '../../../components/common/button';
+import SubmitButton  from '../../../components/common/Button';
 import { resetUserPassword } from "../../../dispatchers";
 
 
 class ResetPassword extends React.Component {
-
+    /* Takes in input required to reset the user and posts them
+     * to the api */
     constructor (props) {
         super (props);
 
@@ -21,6 +22,10 @@ class ResetPassword extends React.Component {
     }
 
     handleChange = (e) => {
+        /* Listen for changes in the form
+         * and update component internal
+          * state */
+
         const key = e.target.name;
         const value = e.target.value;
         let obj = {};
@@ -30,11 +35,16 @@ class ResetPassword extends React.Component {
     };
 
     handleSubmit = (e) => {
+        /* Submits provided data */
+
         e.preventDefault();
         this.props.resetUserPassword(this.props.history, this.state);
     };
 
     getErrorMessages = field => {
+        /* Checks if an error exists for a specific
+         * field and displays it */
+
         if (this.props.auth.reset_password_errors) {
             if (this.props.auth.reset_password_errors.messages) {
                 if (this.props.auth.reset_password_errors.messages.hasOwnProperty(field)) {

@@ -10,23 +10,23 @@ import { loginRequired } from "../../containers/auth/helpers";
 import { fetchUserInfo, deleteUserAccount } from "../../dispatchers";
 
 
-class Dashboard extends React.Component {
+class UserProfile extends React.Component {
+    /* Renders user profile information */
+
     componentWillMount = () => {
+        /* Fetch user details immediately this method is called */
         this.props.fetchUserInfo(this.props.history)
     };
 
-    componentDidMount = () => {
-        console.log(this.props)
-    };
-
     renderUserInfo = () => {
+        /* Custom method to render users detail in a table */
         if(this.props.auth.userDetail) {
             const { username, email, date_joined, updated } = this.props.auth.userDetail;
             return (
                 <table className="table table-bordered">
-                    <caption><h4 className="text-center">
-                        {username}
-                    </h4></caption>
+                    <caption>
+                        <h4 className="text-center">{username}</h4>
+                    </caption>
                     <thead>
                     <tr>
                         <td>Username</td>
@@ -49,6 +49,7 @@ class Dashboard extends React.Component {
     };
 
     handleDeleteAccount = (e) => {
+        /* Method to handle delete call for user account */
         confirmAlert({
             title: 'Click confirm to delete',
             confirmLabel: 'Confirm',
@@ -64,11 +65,26 @@ class Dashboard extends React.Component {
                     <div className="col-md-6 col-sm-offset-3">
                         <h4 className="text-center">My Account</h4>
                         <div className="well account-info">
+
                             {this.renderUserInfo()}
+
                             <div className="text-center">
-                                <Link className="btn btn-success btn-xs update-account-btn" to="/dashboard/account/edit">Update Account</Link>
-                                <Link className="btn btn-info btn-xs update-account-password-btn" to="/forgot-password">Change Password</Link>
-                                <button className="btn btn-danger btn-xs delete-account-btn" onClick={this.handleDeleteAccount}>Delete Account</button>
+                                <Link
+                                    className="btn btn-success btn-xs update-account-btn" to="/dashboard/account/edit">
+                                    Update Account
+                                </Link>
+
+                                <Link
+                                    className="btn btn-info btn-xs update-account-password-btn" to="/forgot-password">
+                                    Change Password
+                                </Link>
+
+                                <button
+                                    className="btn btn-danger btn-xs delete-account-btn"
+                                    onClick={this.handleDeleteAccount}>
+                                    Delete Account
+                                </button>
+
                             </div>
                         </div>
                     </div>
@@ -84,10 +100,11 @@ const mapStateToProps = ({auth}) => {
 };
 
 const mapDispatchToProps = dispatch => {
+    /* Bind methods to props */
     return {
         fetchUserInfo: bindActionCreators(fetchUserInfo, dispatch),
         deleteUserAccount: bindActionCreators(deleteUserAccount, dispatch)
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(loginRequired(backButton(Dashboard)));
+export default connect(mapStateToProps, mapDispatchToProps)(loginRequired(backButton(UserProfile)));

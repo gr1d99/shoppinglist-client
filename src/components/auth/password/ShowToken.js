@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { backButton } from "../../common/BackButton";
 
 const ShowResetToken = (props) => {
+    /* Renders the provided password reset token to the user */
     if (props.auth.password_reset_token) {
         return (
             <div className="well-lg">
@@ -17,6 +18,7 @@ const ShowResetToken = (props) => {
 
             </div>
         )
+
     } else {
         return (
             <div className="well-lg">

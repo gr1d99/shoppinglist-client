@@ -10,16 +10,19 @@ const URL = `${ BASE_URL }${ API_PREFIX }`;
 const DEFAULT_HEADER = 'application/x-www-form-urlencoded';
 
 export const registerUser = (history, data) => {
-    const _prefix = '/auth/register';
-    const registerData = new FormData();
+    /* Make registration request and dispatch actions based on the response */
 
+    // constants
+    const _prefix = '/auth/register';
+    const registerData = new FormData(); // form data object
+
+    // add data to form data object
     registerData.set('username', data.username);
     registerData.set('email', data.email);
     registerData.set('password', data.password);
     registerData.set('confirm', data.confirm);
 
     return dispatch => {
-        // activate loading immediately.
         axios.post(
             `${URL}${_prefix}`, registerData, {
                 headers: {
@@ -29,15 +32,21 @@ export const registerUser = (history, data) => {
                 }
             })
             .then(response => {
-                dispatch(actions.activateLoading());
+                /* Dispatch appropriate actions after successful response */
+                dispatch(actions.activateLoading()); // activate loading immediately.
                 dispatch(actions.RegisterUserSuccess(response));
                 dispatch(actions.successfulOperation(msgs.ACCOUNT_CREATED));
                 dispatch(actions.clearInternalState());
-                dispatch(actions.deactivateLoading());
+                dispatch(actions.deactivateLoading()); // deactivate loading
+
+                // redirect user to login
                 history.push('/login');
             })
             .catch(error => {
-                history.push('/signup');
+                // handle errors in request
+                history.push('/signup'); // redirect user to signup
+
+                // dispatch error action creators
                 dispatch(actions.RegisterUserError(error));
                 dispatch(actions.failedOperation(error))
             })
@@ -46,9 +55,12 @@ export const registerUser = (history, data) => {
 
 
 export const LoginUser = (history, data) => {
+    /* Make user login request and dispatch appropriate action creators */
+
     const _prefix = '/auth/login';
     const loginData = new FormData();
 
+    // add data to form data object
     loginData.set('username', data.username);
     loginData.set('password', data.password);
 
@@ -68,6 +80,9 @@ export const LoginUser = (history, data) => {
                 window.location.reload()
             })
             .catch(error => {
+                // handle errors in request
+
+                // dispatch error action creators
                 dispatch(actions.LoginUserError(error));
                 dispatch(actions.failedOperation(error));
                 history.push("/login")
@@ -76,6 +91,8 @@ export const LoginUser = (history, data) => {
 };
 
 export const LogoutUser = (history) => {
+    /* Make user logout request and dispatch appropriate action creators */
+
     const _prefix = '/auth/logout';
     let apiKey = localStorage.getItem('apiKey');
 
@@ -95,7 +112,11 @@ export const LogoutUser = (history) => {
                 window.location.reload()
             })
             .catch(error => {
+                // handle errors in request
+
                 history.push('/');
+
+                // dispatch error action creators
                 dispatch(actions.LogoutUserError(error))
                 dispatch(actions.failedOperation(error))
             })
@@ -103,6 +124,8 @@ export const LogoutUser = (history) => {
 };
 
 export const fetchUserInfo = (history) => {
+    /* Make user info fetch request and dispatch appropriate action creators */
+
     const _prefix = '/auth/users';
     let apiKey = localStorage.getItem('apiKey');
     const finalUrl = `${URL}${_prefix}`;
@@ -121,17 +144,24 @@ export const fetchUserInfo = (history) => {
             console.log(response)
         })
         .catch(error => {
+            // handle errors in request
+
+            // dispatch error action creators
             dispatch(actions.fetchUserInfoError(error));
             error.response.data.message && dispatch(actions.failedOperation(error));
+
             history.push('/')
         })
 };
 
 export const updateUserInfo = (history, data) => {
+    /* Make user info update request and dispatch appropriate action creators */
+
     const _prefix = '/auth/users';
     const newData = new FormData();
     let apiKey = localStorage.getItem('apiKey');
 
+    // add data to form data object
     newData.set('username', data.username);
 
     return dispatch => {
@@ -151,8 +181,11 @@ export const updateUserInfo = (history, data) => {
                 }, 2000)
             })
             .catch(error => {
-                console.log(error.response);
+                // handle errors in request
+
                 history.push('/dashboard/account/edit');
+
+                // dispatch error action creators
                 dispatch(actions.updateUserInfoError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
             })
@@ -160,9 +193,12 @@ export const updateUserInfo = (history, data) => {
 };
 
 export const getPasswordResetToken = (history, data) => {
+    /* Make user get password reset token request and dispatch appropriate action creators */
+
     const _prefix = '/auth/reset-password';
     const newData = new FormData();
 
+    // add data to form data object
     newData.set('email', data.email);
 
     return dispatch => {
@@ -178,7 +214,11 @@ export const getPasswordResetToken = (history, data) => {
                 history.push('/forgot-password/reset-token/show');
             })
             .catch(error => {
+                // handle errors in request
+
                 history.push('/forgot-password');
+
+                // dispatch error action creators
                 dispatch(actions.getResetTokenError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
             })
@@ -187,9 +227,12 @@ export const getPasswordResetToken = (history, data) => {
 
 
 export const resetUserPassword = (history, data) => {
+    /* Make user password reset request and dispatch appropriate action creators */
+
     const _prefix = '/auth/reset-password/process';
     const newData = new FormData();
 
+    // add data to form data object
     newData.set('username', data.username);
     newData.set('new_password', data.new_password);
     newData.set('confirm', data.confirm);
@@ -208,8 +251,13 @@ export const resetUserPassword = (history, data) => {
                 history.push('/');
             })
             .catch(error => {
+                // handle errors in request
+
+                // dispatch error action creators
                 dispatch(actions.resetPasswordError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
+
+                // redirect user
                 history.push('/forgot-password/reset');
                 setTimeout(
                     () => {
@@ -220,6 +268,8 @@ export const resetUserPassword = (history, data) => {
 };
 
 export const deleteUserAccount = (history) => {
+    /* Make user account delete request and dispatch appropriate action creators */
+
     const _prefix = '/auth/users';
 
     let apiKey = localStorage.getItem('apiKey');
@@ -241,7 +291,11 @@ export const deleteUserAccount = (history) => {
                 }, 1000)
             })
             .catch(error => {
-                history.push(`/`);
+                // handle errors in request
+
+                history.push(`/`); // redirect user
+
+                // dispatch error action creators
                 dispatch(actions.deleteUserAccountError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
             });
@@ -251,9 +305,12 @@ export const deleteUserAccount = (history) => {
 
 // shoppinglists
 export const createShoppingList = (history, data) => {
+    /* Make request to create shopping list and dispatch appropriate action creators */
+
     const _prefix = '/shopping-lists';
     const newData = new FormData();
 
+    // add data to form data object
     newData.set('name', data.name);
     newData.set('description', data.description);
 
@@ -268,20 +325,25 @@ export const createShoppingList = (history, data) => {
                 }
             })
             .then(response => {
-                // const newId = response.data.data.id;
                 dispatch(actions.createShoppingListSuccess(response));
                 dispatch(actions.successfulOperation(msgs.SHOPPING_LIST_CREATED));
-                history.push(`/shoppinglists`)
+                history.push(`/shoppinglists`) // redirect user
             })
             .catch(error => {
+                // handle errors in request
+
+                // dispatch error action creators
                 dispatch(actions.createShoppingListError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
-                history.push(`/shoppinglists/create`)
+
+                history.push(`/shoppinglists/create`) // redirect user
             })
     }
 };
 
 export const getUserShoppingLists = (history, url=null) => {
+    /* Make request to fetch user shopping list and dispatch appropriate action creators */
+
     const _prefix = '/shopping-lists';
     let apiKey = localStorage.getItem('apiKey');
     const finalUrl = !url ? `${URL}${_prefix}?limit=${LIST_LIMIT}&page=${PAGE}`: url;
@@ -298,12 +360,18 @@ export const getUserShoppingLists = (history, url=null) => {
             dispatch(actions.fetchShoppingListSuccess(response));
         })
         .catch(error => {
+            // handle errors in request
+
+            // dispatch error action creators
             dispatch(actions.fetchShoppingListError(error));
-            history.push('/shoppinglists')
+
+            history.push('/shoppinglists') // redirect user
         })
 };
 
 export const getUserShoppingListDetail = (history, id) => {
+    /* Make request to fetch single user shopping list and dispatch appropriate action creators */
+
     const _prefix = '/shopping-lists';
     let apiKey = localStorage.getItem('apiKey');
 
@@ -319,17 +387,24 @@ export const getUserShoppingListDetail = (history, id) => {
                 dispatch(actions.getUserShoppingListSuccess(response))
             })
             .catch(error => {
+                // handle errors in request
+
+                // dispatch error action creators
                 dispatch(actions.getUserShoppingListError(error));
-                history.push('/shoppinglists')
+
+                history.push('/shoppinglists') // redirect user
             })
     }
 };
 
 export const updateShoppingList = (history, id, new_data) => {
-        const _prefix = '/shopping-lists';
-        const newData = new FormData();
+    /* Make request to update user shopping list and dispatch appropriate action creators */
 
-        newData.set('name', new_data.name);
+    const _prefix = '/shopping-lists';
+    const newData = new FormData();
+
+    // add data to form data object
+    newData.set('name', new_data.name);
         newData.set('description', new_data.description);
 
         let apiKey = localStorage.getItem('apiKey');
@@ -349,7 +424,11 @@ export const updateShoppingList = (history, id, new_data) => {
 
                 })
                 .catch(error => {
-                    history.push(`/shoppinglists/${id}/edit`);
+                    // handle errors in request
+
+                    history.push(`/shoppinglists/${id}/edit`); // redirect user
+
+                    // dispatch error action creators
                     dispatch(actions.updateShoppingListError(error));
                     error.response.data.message && dispatch(actions.failedOperation(error));
                 });
@@ -357,7 +436,9 @@ export const updateShoppingList = (history, id, new_data) => {
 };
 
 export const deleteShoppingList = (history, id) => {
-        const _prefix = '/shopping-lists';
+    /* Make request to delete user shopping list and dispatch appropriate action creators */
+
+    const _prefix = '/shopping-lists';
 
         let apiKey = localStorage.getItem('apiKey');
 
@@ -376,7 +457,11 @@ export const deleteShoppingList = (history, id) => {
 
                 })
                 .catch(error => {
-                    history.push(`/shoppinglists/${id}`);
+                    // handle errors in request
+
+                    history.push(`/shoppinglists/${id}`); // redirect user
+
+                    // dispatch error action creators
                     dispatch(actions.deleteShoppingListError(error));
                     error.response.data.message && dispatch(actions.failedOperation(error));
                 });
@@ -386,9 +471,12 @@ export const deleteShoppingList = (history, id) => {
 
 
 export const createShoppingItem = (history, id, data) => {
+    /* Make request to create user shopping item and dispatch appropriate action creators */
+
     const _prefix = '/shopping-lists';
     const newData = new FormData();
 
+    // add data to form data object
     newData.set('name', data.name);
     newData.set('price', data.price);
     newData.set('quantity_description', data.quantity);
@@ -411,7 +499,11 @@ export const createShoppingItem = (history, id, data) => {
                 dispatch(actions.successfulOperation(msgs.SHOPPING_LIST_CREATED))
             })
             .catch(error => {
-                history.push(`/shoppinglists/${id}/items/create`);
+                // handle errors in request
+
+                history.push(`/shoppinglists/${id}/items/create`); // redirect user
+
+                // dispatch error action creators
                 dispatch(actions.createShoppingItemError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
             })
@@ -420,6 +512,8 @@ export const createShoppingItem = (history, id, data) => {
 
 
 export const fetchShoppingItems = (history, id, url=null) => {
+    /* Make request to fetch user shopping items and dispatch appropriate action creators */
+
     const _prefix = '/shopping-lists';
     let apiKey = localStorage.getItem('apiKey');
     const finalUrl = !url ? `${URL}${_prefix}/${id}/shopping-items?limit=${ITEM_LIST_LIMIT}&page=${PAGE}`: url;
@@ -433,11 +527,15 @@ export const fetchShoppingItems = (history, id, url=null) => {
                 }
             })
             .then(response => {
-                history.push(`/shoppinglists/${id}/items`);
+                history.push(`/shoppinglists/${id}/items`); // redirect user
                 dispatch(actions.fetchShoppingItemsSuccess(response));
             })
             .catch(error => {
-                history.push(`/shoppinglists/${id}`);
+                // handle errors in request
+
+                history.push(`/shoppinglists/${id}`); // redirect user
+
+                // dispatch error action creators
                 dispatch(actions.fetchShoppingItemsError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
             })
@@ -445,6 +543,8 @@ export const fetchShoppingItems = (history, id, url=null) => {
 };
 
 export const getUserShoppingListItemDetail = (history, shlId, itemId) => {
+    /* Make request to fetch user shopping item detail and dispatch appropriate action creators */
+
     const _prefix = '/shopping-lists';
     let apiKey = localStorage.getItem('apiKey');
 
@@ -457,16 +557,23 @@ export const getUserShoppingListItemDetail = (history, shlId, itemId) => {
                 }
             })
             .then(response => {
-                dispatch(actions.fetchShoppingItemDetailSuccess(response))
-                history.push(`/shoppinglists/${shlId}/items/${itemId}/edit`)
+                // dispatch success action creators
+                dispatch(actions.fetchShoppingItemDetailSuccess(response));
+
+                history.push(`/shoppinglists/${shlId}/items/${itemId}/edit`) // redirect user
             })
             .catch(error => {
+                // handle errors in request
+
+                // dispatch error action creators
                 dispatch(actions.fetchShoppingItemsDetailError(error));
             })
     }
 };
 
 export const updateShoppingListItem = (history, shlId, itemId, new_data) => {
+    /* Make request to update user shopping item and dispatch appropriate action creators */
+
     const _prefix = '/shopping-lists';
     const newData = new FormData();
 
@@ -476,6 +583,7 @@ export const updateShoppingListItem = (history, shlId, itemId, new_data) => {
     let _bought = '';
     new_data.bought === true ? _bought = '1': _bought = '0';
 
+    // add data into object
     newData.set('name', new_data.name);
     newData.set('price', new_data.price);
     newData.set('bought', _bought);
@@ -492,13 +600,19 @@ export const updateShoppingListItem = (history, shlId, itemId, new_data) => {
                 }
             })
             .then(response => {
-                history.push(`/shoppinglists/${shlId}/items`);
-                dispatch(actions.successfulOperation(msgs.SHOPPING_ITEM_UPDATED))
+                history.push(`/shoppinglists/${shlId}/items`); // redirect user
+
+                // dispatch success action creators
+                dispatch(actions.successfulOperation(msgs.SHOPPING_ITEM_UPDATED));
                 dispatch(actions.updateShoppingItemDetailSuccess(response));
 
             })
             .catch(error => {
-                history.push(`/shoppinglists/${shlId}/edit`);
+                // handle errors in request
+
+                history.push(`/shoppinglists/${shlId}/edit`); // redirect user
+
+                // dispatch error action creators
                 dispatch(actions.updateShoppingItemsDetailError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
             });
@@ -506,6 +620,8 @@ export const updateShoppingListItem = (history, shlId, itemId, new_data) => {
 };
 
 export const deleteShoppingItem = (history, shlId, itemId) => {
+    /* Make request to delete user shopping item and dispatch appropriate action creators */
+
     const _prefix = '/shopping-lists';
 
     let apiKey = localStorage.getItem('apiKey');
@@ -519,13 +635,19 @@ export const deleteShoppingItem = (history, shlId, itemId) => {
                 }
             })
             .then(response => {
-                history.push(`/shoppinglists/${shlId}`);
+                history.push(`/shoppinglists/${shlId}`); // redirect user
+
+                // dispatch error action creators
                 dispatch(actions.deleteShoppingItemSuccess(response));
                 dispatch(actions.successfulOperation(response.data.message))
 
             })
             .catch(error => {
-                history.push(`/shoppinglists/${shlId}/items`);
+                // handle errors in request
+
+                history.push(`/shoppinglists/${shlId}/items`); // redirect user
+
+                // dispatch error action creators
                 dispatch(actions.deleteShoppingItemError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
             });
@@ -533,10 +655,11 @@ export const deleteShoppingItem = (history, shlId, itemId) => {
 };
 
 export const searchShoppingLists = (history, term, url=null) => {
+    /* Make request to search user shopping lists and dispatch appropriate action creators */
+
     const _prefix = '/shopping-lists/search';
     let apiKey = localStorage.getItem('apiKey');
     const finalUrl = !url ? `${URL}${_prefix}?q=${term}&limit=${SEARCH_LIMIT}&page=${PAGE}`: url;
-    console.log('url------', url)
 
     return dispatch => {
         axios.get(
@@ -547,12 +670,18 @@ export const searchShoppingLists = (history, term, url=null) => {
                 }
             })
             .then(response => {
+                // dispatch success action creators
                 dispatch(actions.searchShoppingListsSuccess(response));
-                response.data.message && dispatch(actions.successfulOperation(response.data.message))
-                history.push('/shoppinglists/search')
+                response.data.message && dispatch(actions.successfulOperation(response.data.message));
+
+                history.push('/shoppinglists/search') // redirect user
             })
             .catch(error => {
-                history.push(`/shoppinglists/search`);
+                // handle errors in request
+
+                history.push(`/shoppinglists/search`); // redirect user
+
+                // dispatch error action creators
                 dispatch(actions.searchShoppingListsError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
             })

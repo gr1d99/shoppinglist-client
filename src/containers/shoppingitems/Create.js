@@ -3,16 +3,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { createShoppingItem } from "../../dispatchers/index";
-import SubmitButton  from '../../components/common/button';
+import SubmitButton  from '../../components/common/Button';
 import { loginRequired } from "../auth/helpers/index";
 import { backButton } from "../../components/common/BackButton";
 
 export class CreateShoppingItem extends React.Component {
+    /* Handles creation of shopping item */
+
     constructor (props) {
         super (props);
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
             name: '',
@@ -23,11 +22,14 @@ export class CreateShoppingItem extends React.Component {
     }
 
     handleChange = (e) => {
+        /* Listen for changes in
+         * form and update state */
+
         const key = e.target.name;
         const value = e.target.value;
         let obj = {};
 
-        const reg = /^[0-9]+/;
+        const reg = /^[0-9]+/; // regex to get shopping list ID.
 
         key === 'price' && !value.match(reg) && this.setState({price_error: 'not a valid price'});
 
@@ -45,6 +47,9 @@ export class CreateShoppingItem extends React.Component {
     };
 
     getErrorMessages = field => {
+        /* Checks if an error exists for a specific
+         * field and displays it */
+
         if (this.props.shoppingItem.error_messages) {
             if (this.props.shoppingItem.error_messages.messages) {
                 if (this.props.shoppingItem.error_messages.messages.hasOwnProperty(field)) {

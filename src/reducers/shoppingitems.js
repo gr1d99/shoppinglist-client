@@ -5,7 +5,7 @@ export const initialState = {
     shlItemDetail: {},
     items: [],
     shlId: null
-}
+};
 
 export const shoppingItemReducer = (state=initialState, action) => {
     switch (action.type){

@@ -1,3 +1,5 @@
+/* Combine all app reducers */
+
 import { combineReducers } from 'redux';
 
 import auth from './auth';

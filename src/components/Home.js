@@ -4,7 +4,12 @@ import { Link } from 'react-router-dom';
 
 
 export class HomePage extends React.Component {
+    /* Application home page container */
+
     renderContent = () => {
+        /* Checks if user is authenticated and renders
+         * content based on the authentication flag */
+
         switch (this.props.auth.isAuthenticated){
             case false:
                 return (

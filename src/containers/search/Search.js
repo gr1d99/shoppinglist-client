@@ -10,6 +10,8 @@ import { backButton } from "../../components/common/BackButton";
 
 
 export class SearchShoppingLists extends React.Component {
+    /* Handles shopping list search functionality */
+
     constructor (props) {
         super(props);
 
@@ -17,11 +19,15 @@ export class SearchShoppingLists extends React.Component {
     }
 
     handleSearchTermChange = (e) => {
+        /* Listen for changes in the
+        search box input text */
+
         const key = e.target.name;
         let value = e.target.value;
         let obj = {};
 
         obj[key] = value;
+
         this.setState(obj);
     };
 
@@ -31,11 +37,15 @@ export class SearchShoppingLists extends React.Component {
     };
 
     handleClick = url => e => {
+        /* Takes use to next page or previous page if they exist */
+
         e.preventDefault();
         this.props.searchShoppingLists(this.props.history, '', url)
     };
 
     pageMetaData = (location) => {
+        /* Renders meta-data in the response object */
+
         if (this.props.search.results) {
             const {
                 items_in_page,
@@ -48,22 +58,46 @@ export class SearchShoppingLists extends React.Component {
 
 
             switch (location) {
+                /* Items in this case are rendered on top of the page */
+
                 case 'up':
                     return (
                         <div className="">
-                            <h4 className="results-count">{!isNaN(items_in_page) ? `${items_in_page} Items found` : ''}</h4>
+                            <h4 className="results-count">
+                                {!isNaN(items_in_page) ? `${items_in_page} Items found` : ''}
+                                </h4>
                         </div>
                     );
 
                 case 'down':
+                    /* Items in this case are rendered at the bottom of the page */
+
                     if (next_page > 1 || current_page > 1) {
                         return (
                             <div>
                                 <nav aria-label="">
                                     <ul className="pager">
-                                        <li className="next pull-left"><Link to='/' onClick={this.handleClick(previous_page_url)} className="pull-left"><span aria-hidden="true">&larr;</span> Previous </Link></li>
+                                        <li className="next pull-left">
+                                            <Link
+                                                to='/'
+                                                onClick={this.handleClick(previous_page_url)}
+                                                className="pull-left">
+                                                <span aria-hidden="true">&larr;</span>
+                                                Previous
+                                            </Link>
+                                        </li>
+
                                         <span className="text-center page-info">Page {current_page} of {total_pages}</span>
-                                        <li className="previous pull-right"><Link to='/' onClick={this.handleClick(next_page_url)}> <span aria-hidden="true">&rarr;</span> Next</Link></li>
+
+                                        <li className="previous pull-right">
+                                            <Link
+                                                to='/'
+                                                onClick={this.handleClick(next_page_url)}>
+                                                <span aria-hidden="true">&rarr;</span>
+                                                Next
+                                            </Link>
+                                        </li>
+
                                     </ul>
                                 </nav>
                             </div>
@@ -78,6 +112,8 @@ export class SearchShoppingLists extends React.Component {
         }
     };
     renderSearchResults = () => {
+        /* Show search results on the page */
+
         if (this.props.search.results) {
             if (this.props.search.results.items_in_page !== 0) {
                 return this.props.search.results.shoppinglists.map(
@@ -86,13 +122,19 @@ export class SearchShoppingLists extends React.Component {
                             <div key={shl.id} className="col-sm-3 result-item">
                                 <div className="panel panel-default">
                                     <div className="panel-heading">
+
                                         <h6 className="text-center">
                                             <Link to={`/shoppinglists/${shl.id}`}>{shl.name.toUpperCase()}</Link>
                                         </h6>
+
                                     </div>
+
                                     <div className="panel-body shoppinglist-box">
-                                        <p className="text-justified"><Truncate lines={2} ellipsis={
-                                            <span>...</span>}>{shl.description}</Truncate></p>
+
+                                        <p className="text-justified">
+                                            <Truncate lines={2} ellipsis={<span>...</span>}>{shl.description}</Truncate>
+                                        </p>
+
                                     </div>
                                     <div className="panel-footer"></div>
                                 </div>
@@ -108,27 +150,41 @@ export class SearchShoppingLists extends React.Component {
         return (
             <div className="row shopping-lists">
                 <div className="col-lg-12 search">
+
                     <hr/>
-                    <form className="navbar-form navbar-left pull-right" onSubmit={this.handleSearch}>
+
+                    <form className="navbar-form navbar-left pull-right"
+                          onSubmit={this.handleSearch}>
+
                         <div className="form-group">
-                            <input type="text" name="term" onChange={this.handleSearchTermChange} className="form-control" placeholder="Search"/>
+                            <input type="text"
+                                   name="term"
+                                   onChange={this.handleSearchTermChange}
+                                   className="form-control"
+                                   placeholder="Search"/>
                         </div>
+
                         <button
                             type="submit"
                             className="btn btn-default">
                             Search
                         </button>
                     </form>
+
                 </div>
+
                 <div className="col-lg-12">
                     {this.pageMetaData('up')}
                 </div>
+
                 <div className="col-lg-12 results">
                     {this.renderSearchResults()}
                 </div>
+
                 <div className="col-lg-12">
                     {this.pageMetaData('down')}
                 </div>
+
             </div>
         )
     }
