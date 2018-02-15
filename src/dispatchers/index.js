@@ -617,22 +617,21 @@ export const updateShoppingListItem = (history, shlId, itemId, new_data) => {
                 }
             })
             .then(response => {
-                history.push(`/shoppinglists/${shlId}/items`); // redirect user
-
                 // dispatch success action creators
                 dispatch(actions.successfulOperation(msgs.SHOPPING_ITEM_UPDATED));
                 dispatch(actions.updateShoppingItemDetailSuccess(response));
                 dispatch(actions.deactivateLoading()); // deactivate loading
+
+                history.push(`/shoppinglists/${shlId}/items`); // redirect user
             })
             .catch(error => {
                 // handle errors in request
-
-                history.push(`/shoppinglists/${shlId}/edit`); // redirect user
 
                 // dispatch error action creators
                 dispatch(actions.updateShoppingItemsDetailError(error));
                 error.response.data.message && dispatch(actions.failedOperation(error));
                 dispatch(actions.deactivateLoading()); // deactivate loading
+                history.push(`/shoppinglists/${shlId}/items/${itemId}/edit`); // redirect user
             });
     }
 };
