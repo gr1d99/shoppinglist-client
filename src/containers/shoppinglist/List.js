@@ -85,11 +85,11 @@ export class List extends React.Component {
                         </div>
                     )
                 } else {
-                    return ''
+                    return <div></div>
                 }
 
             default:
-                return ''
+                return <div></div>
         }
     };
 
