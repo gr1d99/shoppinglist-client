@@ -23,7 +23,8 @@ const setup = (connected=false) => {
         auth: {
             isAuthenticated: false
         },
-        alerts: {}
+        alerts: {},
+        loader: {}
     };
     mockStore = configureStore(middlewares);
     store = mockStore(initialState);
