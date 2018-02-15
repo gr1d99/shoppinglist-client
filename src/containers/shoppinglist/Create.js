@@ -64,7 +64,7 @@ export class CreateShoppingList extends React.Component {
                 <div className="col-sm-6 col-sm-offset-3">
                     <div className="thumbnail shoppinglist-create">
 
-                        <h3 className="text-center">Create new Shopping List</h3>
+                        <h3 className="text-center">Create Shopping List</h3>
 
                         <form className="form shoppinglist-create" onSubmit={this.handleSubmit}>
                             <div className="form-group">

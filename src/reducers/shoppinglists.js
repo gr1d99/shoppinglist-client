@@ -24,6 +24,7 @@ export const shoppingListReducer = (state=initialState, action) => {
             return action.payload.data;
 
         case types.FETCH_SHOPPINGLISTS_ERROR:
+            console.log(action.payload)
             return action.payload;
 
         case types.SHOPPINGLIST_DETAIL:
