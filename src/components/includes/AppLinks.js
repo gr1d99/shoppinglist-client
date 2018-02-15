@@ -64,16 +64,14 @@ export const ShoppingListsLink = (props) => {
 
                 <li className="active">
                     <Link to="/shoppinglists">
-                        <span className="glyphicon glyphicon-list"></span>
-                        My Shopping Lists
+                        <span className="glyphicon glyphicon-list"></span> My Shopping Lists
                         <span className="sr-only">(current)</span>
                     </Link>
                 </li>
 
                 <li>
                     <Link to='/shoppinglists/search'>
-                        <span className="glyphicon glyphicon-search"></span>
-                        Search
+                        <span className="glyphicon glyphicon-search"></span> Search
                     </Link>
                 </li>
 
