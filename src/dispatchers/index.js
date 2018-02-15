@@ -36,6 +36,7 @@ export const registerUser = (history, data) => {
                 dispatch(actions.RegisterUserSuccess(response));
                 dispatch(actions.successfulOperation(msgs.ACCOUNT_CREATED));
                 dispatch(actions.clearInternalState());
+                dispatch(actions.deactivateLoading()); // deactivate loading
 
                 // redirect user to login
                 history.push('/login');
@@ -46,7 +47,8 @@ export const registerUser = (history, data) => {
 
                 // dispatch error action creators
                 dispatch(actions.RegisterUserError(error));
-                dispatch(actions.failedOperation(error))
+                dispatch(actions.failedOperation(error));
+                dispatch(actions.deactivateLoading()); // deactivate loading
             })
     }
 };
@@ -72,11 +74,10 @@ export const LoginUser = (history, data) => {
                 }
             })
             .then(response => {
-                dispatch(actions.activateLoading()); // activate loading immediately.
                 dispatch(actions.LoginUserSuccess(response));
                 dispatch(actions.successfulOperation(msgs.LOGGED_IN));
                 history.push("/");
-                window.location.reload()
+                window.location.reload();
                 dispatch(actions.deactivateLoading()); // deactivate loading
             })
             .catch(error => {
@@ -85,7 +86,7 @@ export const LoginUser = (history, data) => {
                 // dispatch error action creators
                 dispatch(actions.LoginUserError(error));
                 dispatch(actions.failedOperation(error));
-                history.push("/login")
+                history.push("/login");
                 dispatch(actions.deactivateLoading()); // deactivate loading
 
             })
