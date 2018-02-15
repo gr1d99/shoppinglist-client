@@ -363,6 +363,8 @@ export const getUserShoppingLists = (history, url=null) => {
     let apiKey = localStorage.getItem('apiKey');
     const finalUrl = !url ? `${URL}${_prefix}?limit=${LIST_LIMIT}&page=${PAGE}`: url;
 
+    console.log(finalUrl)
+
     return dispatch => axios.get(
         finalUrl, {
             headers: {
