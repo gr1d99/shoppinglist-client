@@ -45,6 +45,13 @@ Check coverage
 $ npm test -- --coverage
 ```
 
+## Deployment
 
+This is the most easiest part.
+1. Create an account on [heroku](https://www.heroku.com/) account.
+2. Push this project into your git repository.
+3. Create an app on heroku and link it to your git repository and click `Deploy` button.
 
+## Built With
 
+* [React Create App](https://github.com/facebook/create-react-app)
