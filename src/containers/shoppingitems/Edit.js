@@ -43,7 +43,7 @@ export class EditShoppingListItem extends React.Component {
             default:
                 return this.props.history.push('/login');
         }
-    }
+    };
 
 
     handleChange = e => {
